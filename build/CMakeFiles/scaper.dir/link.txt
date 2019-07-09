@@ -1,1 +1,0 @@
-/usr/bin/c++      CMakeFiles/scaper.dir/main.cpp.o CMakeFiles/scaper.dir/scaper_automoc.cpp.o  -o scaper -rdynamic /usr/lib/x86_64-linux-gnu/libQt5Widgets.so.5.5.1 /usr/lib/x86_64-linux-gnu/libQt5Gui.so.5.5.1 /usr/lib/x86_64-linux-gnu/libQt5Core.so.5.5.1 
