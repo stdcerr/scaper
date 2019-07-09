@@ -1,0 +1,3 @@
+# Hashes of file build rules.
+9bd65d4364032186e9698b313bf01927 CMakeFiles/scaper_automoc
+d262e0f9ec6374465c8594f77ae4cfc6 ui_scaper.h

@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1099</width>
+    <height>604</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout_4">
+    <item row="0" column="0">
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>1</number>
+      </property>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>Check</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="0" column="0">
+         <widget class="QTextEdit" name="OutputTextEdit">
+          <property name="textInteractionFlags">
+           <set>Qt::LinksAccessibleByKeyboard|Qt::LinksAccessibleByMouse|Qt::TextBrowserInteraction|Qt::TextEditable|Qt::TextEditorInteraction|Qt::TextSelectableByKeyboard|Qt::TextSelectableByMouse</set>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>Files:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="FilesLineEdit"/>
+          </item>
+          <item>
+           <widget class="QPushButton" name="ChoosePushButton">
+            <property name="text">
+             <string>Choose...</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="2" column="0">
+         <widget class="QPushButton" name="CheckPushButton">
+          <property name="text">
+           <string>Check!</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>Options</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_5">
+        <item row="1" column="0">
+         <widget class="QGroupBox" name="groupBox">
+          <property name="title">
+           <string>Check mode</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout">
+           <item>
+            <widget class="QRadioButton" name="weakModeRadioButton">
+             <property name="text">
+              <string>wea&amp;k</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="standardModeRadioButton">
+             <property name="text">
+              <string>standard</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="checksModeRadioButton">
+             <property name="text">
+              <string>checks</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QRadioButton" name="strictModeRadioButton">
+             <property name="text">
+              <string>strict</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QGroupBox" name="groupBox_2">
+          <property name="title">
+           <string>Compiler options</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_3">
+           <item row="0" column="0">
+            <layout class="QHBoxLayout" name="horizontalLayout_2">
+             <item>
+              <widget class="QLabel" name="label_3">
+               <property name="text">
+                <string>Include dirs (e.g. -I&lt;dir1&gt; -I&lt;dir2&gt;:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="includedirsLineEdit"/>
+             </item>
+            </layout>
+           </item>
+           <item row="1" column="0">
+            <layout class="QHBoxLayout" name="horizontalLayout_4">
+             <item>
+              <widget class="QLabel" name="label_4">
+               <property name="text">
+                <string>Defines (e.g. -DDEBUG=1):</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLineEdit" name="definesLineEdit"/>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>858</width>
+            <height>51</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="0" column="0">
+         <widget class="QGroupBox" name="SplintOptionsGroupBox">
+          <property name="title">
+           <string>Splint options</string>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_2">
+           <item row="5" column="1">
+            <widget class="QCheckBox" name="compdefCheckBox">
+             <property name="text">
+              <string>compdef</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="3">
+            <widget class="QCheckBox" name="usedefCheckBox">
+             <property name="text">
+              <string>usedef</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="1">
+            <widget class="QCheckBox" name="matchanyintegralCheckBox">
+             <property name="text">
+              <string>matchanyintegral</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="3">
+            <widget class="QCheckBox" name="imptypeCheckBox">
+             <property name="text">
+              <string>imptype</string>
+             </property>
+            </widget>
+           </item>
+           <item row="11" column="1">
+            <widget class="QCheckBox" name="ptrnegateCheckBox">
+             <property name="text">
+              <string>ptrnegate</string>
+             </property>
+            </widget>
+           </item>
+           <item row="11" column="3">
+            <widget class="QCheckBox" name="bufferoverflowhighCheckBox">
+             <property name="text">
+              <string>bufferoverflowhigh</string>
+             </property>
+            </widget>
+           </item>
+           <item row="12" column="0">
+            <widget class="QCheckBox" name="typeCheckBox">
+             <property name="text">
+              <string>type</string>
+             </property>
+            </widget>
+           </item>
+           <item row="12" column="1">
+            <widget class="QCheckBox" name="mayaliasuniqueCheckBox">
+             <property name="text">
+              <string>mayaliasunique</string>
+             </property>
+            </widget>
+           </item>
+           <item row="12" column="3">
+            <widget class="QCheckBox" name="boolopsCheckBox">
+             <property name="text">
+              <string>boolops</string>
+             </property>
+            </widget>
+           </item>
+           <item row="13" column="0">
+            <widget class="QCheckBox" name="nullpassCheckBox">
+             <property name="text">
+              <string>nullpass</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0" colspan="8">
+            <widget class="Line" name="line">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="13" column="1">
+            <widget class="QCheckBox" name="nullderefCheckBox">
+             <property name="text">
+              <string>nullderef</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="Line" name="line_2">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="2">
+            <widget class="QLabel" name="pathtosplintLabel">
+             <property name="text">
+              <string>Path to splint:</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="3">
+            <widget class="QLineEdit" name="pathtosplintLineEdit"/>
+           </item>
+           <item row="0" column="7">
+            <widget class="QPushButton" name="pathtosplintPushButton">
+             <property name="text">
+              <string>Choose...</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="6">
+            <widget class="QCheckBox" name="formattypeCheckBox">
+             <property name="text">
+              <string>formattype</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="6">
+            <widget class="QCheckBox" name="onlytransCheckBox">
+             <property name="text">
+              <string>onlytrans</string>
+             </property>
+            </widget>
+           </item>
+           <item row="11" column="6">
+            <widget class="QCheckBox" name="globsCheckBox">
+             <property name="text">
+              <string>globs</string>
+             </property>
+            </widget>
+           </item>
+           <item row="13" column="6">
+            <widget class="QCheckBox" name="exportlocalCheckBox">
+             <property name="text">
+              <string>exportlocal</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="0">
+            <widget class="QCheckBox" name="posixlibCheckBox">
+             <property name="text">
+              <string>posixlib</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0">
+            <widget class="QCheckBox" name="unixlibCheckBox">
+             <property name="text">
+              <string>unixlib</string>
+             </property>
+            </widget>
+           </item>
+           <item row="11" column="0">
+            <widget class="QCheckBox" name="warnposixCheckBox">
+             <property name="text">
+              <string>warnposix</string>
+             </property>
+            </widget>
+           </item>
+           <item row="10" column="0">
+            <widget class="QCheckBox" name="posixstrictlibCheckBox">
+             <property name="text">
+              <string>posixstrictlib</string>
+             </property>
+            </widget>
+           </item>
+           <item row="10" column="1">
+            <widget class="QCheckBox" name="preprocCheckBox">
+             <property name="text">
+              <string>preproc</string>
+             </property>
+            </widget>
+           </item>
+           <item row="10" column="6">
+            <widget class="QCheckBox" name="mustfreefreshCheckBox">
+             <property name="text">
+              <string>mustfreefresh</string>
+             </property>
+            </widget>
+           </item>
+           <item row="10" column="3">
+            <widget class="QCheckBox" name="unrecogCheckBox">
+             <property name="text">
+              <string>unrecog</string>
+             </property>
+            </widget>
+           </item>
+           <item row="10" column="7">
+            <widget class="QCheckBox" name="branchstateCheckBox">
+             <property name="text">
+              <string>branchstate</string>
+             </property>
+            </widget>
+           </item>
+           <item row="11" column="7">
+            <widget class="QCheckBox" name="nullretCheckBox">
+             <property name="text">
+              <string>nullret</string>
+             </property>
+            </widget>
+           </item>
+           <item row="12" column="7">
+            <widget class="QCheckBox" name="retvalintCheckBox">
+             <property name="text">
+              <string>retvalint</string>
+             </property>
+            </widget>
+           </item>
+           <item row="13" column="7">
+            <widget class="QCheckBox" name="retvalotherCheckBox">
+             <property name="text">
+              <string>retvalother</string>
+             </property>
+            </widget>
+           </item>
+           <item row="13" column="3">
+            <widget class="QCheckBox" name="varuseCheckBox">
+             <property name="text">
+              <string>varuse</string>
+             </property>
+            </widget>
+           </item>
+           <item row="12" column="6">
+            <widget class="QCheckBox" name="predboolothersCheckBox">
+             <property name="text">
+              <string>predboolothers</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="7">
+            <widget class="QCheckBox" name="namechecksCheckBox">
+             <property name="text">
+              <string>namechecks</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="7">
+            <widget class="QCheckBox" name="isoreservedCheckBox">
+             <property name="text">
+              <string>isoreserved</string>
+             </property>
+            </widget>
+           </item>
+           <item row="14" column="0">
+            <widget class="QCheckBox" name="isolibCheckBox">
+             <property name="text">
+              <string>isolib</string>
+             </property>
+            </widget>
+           </item>
+           <item row="14" column="1">
+            <widget class="QCheckBox" name="exportfcnCheckBox">
+             <property name="text">
+              <string>exportfcn</string>
+             </property>
+            </widget>
+           </item>
+           <item row="14" column="3">
+            <widget class="QCheckBox" name="gnuextensionsCheckBox">
+             <property name="text">
+              <string>gnuextensions</string>
+             </property>
+            </widget>
+           </item>
+           <item row="14" column="6">
+            <widget class="QCheckBox" name="paramuseCheckBox">
+             <property name="text">
+              <string>paramuse</string>
+             </property>
+            </widget>
+           </item>
+           <item row="14" column="7">
+            <widget class="QCheckBox" name="exportheaderCheckBox">
+             <property name="text">
+              <string>exportheader</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="5">
+            <widget class="QCheckBox" name="declundefCheckBox">
+             <property name="text">
+              <string>declundef</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="5">
+            <widget class="QCheckBox" name="temptransCheckBox">
+             <property name="text">
+              <string>temptrans</string>
+             </property>
+            </widget>
+           </item>
+           <item row="10" column="5">
+            <widget class="QCheckBox" name="trytorecoverCheckBox">
+             <property name="text">
+              <string>trytorecover</string>
+             </property>
+            </widget>
+           </item>
+           <item row="11" column="5">
+            <widget class="QCheckBox" name="nullassignCheckBox">
+             <property name="text">
+              <string>nullassign</string>
+             </property>
+            </widget>
+           </item>
+           <item row="12" column="5">
+            <widget class="QCheckBox" name="formatconstCheckBox">
+             <property name="text">
+              <string>formatconst</string>
+             </property>
+            </widget>
+           </item>
+           <item row="13" column="5">
+            <widget class="QCheckBox" name="readonlytransCheckBox">
+             <property name="text">
+              <string>readonlytrans</string>
+             </property>
+            </widget>
+           </item>
+           <item row="14" column="5">
+            <widget class="QCheckBox" name="noeffectCheckBox">
+             <property name="text">
+              <string>noeffect</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="4">
+            <widget class="QCheckBox" name="globstateCheckBox">
+             <property name="text">
+              <string>globstate</string>
+             </property>
+            </widget>
+           </item>
+           <item row="7" column="4">
+            <widget class="QCheckBox" name="compdestroyCheckBox">
+             <property name="text">
+              <string>compdestroy</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QLabel" name="label">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="text">
+              <string>&lt;b&gt;checked means +, unchecked -&lt;/b&gt;</string>
+             </property>
+             <property name="textFormat">
+              <enum>Qt::RichText</enum>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="6">
+            <widget class="QCheckBox" name="checkllcheckBox">
+             <property name="text">
+              <string>Check All</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="5">
+            <widget class="QCheckBox" name="uncheckallcheckBox">
+             <property name="text">
+              <string>Uncheck All</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1099</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuSplint_GUI">
+    <property name="title">
+     <string>Fi&amp;le</string>
+    </property>
+    <addaction name="actionQuit"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionAbout"/>
+    <addaction name="actionAboutQt"/>
+   </widget>
+   <addaction name="menuSplint_GUI"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <action name="actionQuit">
+   <property name="text">
+    <string>&amp;Quit</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>&amp;About SplintGUI</string>
+   </property>
+  </action>
+  <action name="actionAboutQt">
+   <property name="text">
+    <string>A&amp;boutQt</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

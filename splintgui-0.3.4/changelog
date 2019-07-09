@@ -1,0 +1,37 @@
+07.03.2010 Christoph Thielecke <crissi99@gmx.de>
+	displaying error message on console fixed
+	version updated to 0.3.4
+
+21.10.2009 Christoph Thielecke <crissi99@gmx.de>
+	mayaliasuniqueCheckBox name fixed
+	code file not found on linux fixed
+	includes parameter fixed
+	defines parameter fixed
+	noeffect option added
+	globstate option added
+	compdestroy option added
+	multiple file files support fixed
+	version updated to 0.3.3
+
+10.08.2009 Christoph Thielecke <crissi99@gmx.de>
+	check file fixed
+	includes and defines saving fixed
+	mail address in about added
+	version updated to 0.3.2
+
+06.08.2009 Christoph Thielecke <crissi99@gmx.de>
+	win32 user home dir fixed
+	split path fixed on win32
+	split exec fixed on win32
+	path to splint saving fixed
+	version updated to 0.3.1
+
+12.05.2008 Christoph Thielecke <crissi99@gmx.de>
+	more options added
+	includedirs lineedit added
+	defines lineedit added
+	options moved to own tab
+	version updated to 0.3
+
+27.11.2008 Christoph Thielecke <crissi99@gmx.de>
+	initial release 0.2
