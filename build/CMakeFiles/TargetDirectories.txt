@@ -1,4 +1,0 @@
-/home/ron/src/scaper/build/CMakeFiles/edit_cache.dir
-/home/ron/src/scaper/build/CMakeFiles/rebuild_cache.dir
-/home/ron/src/scaper/build/CMakeFiles/scaper.dir
-/home/ron/src/scaper/build/CMakeFiles/scaper_automoc.dir
