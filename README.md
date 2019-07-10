@@ -3,10 +3,10 @@ static code analysis project which supports multiple SCA tools with Qt GUI
 
 INSTALLATION:
 --
-clone git repo
-in source directory create a directory build/
-cd build/
-cmake ..
+clone git repo<br>
+in source directory create a directory 'build' (mkdir build)<br>
+cd build/<br>
+cmake ..<br>
 make
 
 ---
