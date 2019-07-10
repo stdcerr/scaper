@@ -1,18 +1,18 @@
-#ifndef __yasca_h__
+#ifndef __scaper_h__
 #define __yaisca_h__
 
-#include "ui_main.h"
+#include "ui_scaper.h"
 
 #define OK      0
 #define ERROR   -1
 
-class yasca {
+class scaper {
     private:
     int checkall(QObject*);
     int uncheckall(QObject*);
     public:
-        yasca(){}
-        ~yasca(){}
+        scaper(){}
+        ~scaper(){}
         Ui::MainWindow ui;
     public slots:
         void ChckBtn(void);

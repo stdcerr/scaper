@@ -11,14 +11,14 @@
 #include <QtWidgets/QFileDialog>
 #include <QtWidgets/QMessageBox>
 #include "ui_scaper.h"
-#include "yasca.h"
+#include "scaper.h"
 
 
 int main( int argc, char **argv )
 {
     QApplication a( argc, argv );
     QMainWindow *widget = new QMainWindow;
-    yasca *app = new yasca;
+    scaper *app = new scaper;
     Ui::MainWindow ui;
 
     ui.setupUi(widget);
@@ -44,7 +44,7 @@ int main( int argc, char **argv )
     return OK;
 }
 
-void yasca::UnchckBtn(void) {
+void scaper::UnchckBtn(void) {
     std::cout << "inside " << __func__ <<std::endl;
     if (!uncheckall(ui.SplintOptionsGroupBox))
         std::cout << "all unchecked!" << std::endl;
@@ -52,7 +52,7 @@ void yasca::UnchckBtn(void) {
     msgBox.setText("test!");
     msgBox.show();
 }
-void yasca::ChckBtn(void) {
+void scaper::ChckBtn(void) {
     std::cout << "inside " << __func__ <<std::endl;
     if (!checkall(ui.SplintOptionsGroupBox))
         std::cout << "all checked!" << std::endl;
@@ -60,12 +60,12 @@ void yasca::ChckBtn(void) {
     msgBox.setText("test!");
     msgBox.show();
 }
-void yasca::PthBtn(void) {
+void scaper::PthBtn(void) {
     std::cout << "inside " << __func__ <<std::endl;
-    QString fname = QFileDialog::getOpenFileName(this,
-        tr("Path to splint"), "/usr/bin", QT_TR_NOOP("All Files (*.*)"));
+    QString fname = QFileDialog::getOpenFileName(nullptr,
+        "Path to splint", "/usr/bin", "All Files (*.*)");
 }
-int yasca::checkall(QObject *parentWidget) {
+int scaper::checkall(QObject *parentWidget) {
     int rv = OK;
     QList<QCheckBox *>list = parentWidget->findChildren<QCheckBox *>();
     QCheckBox chk;
@@ -77,7 +77,7 @@ int yasca::checkall(QObject *parentWidget) {
     return rv;
 }
 
-int yasca::uncheckall(QObject *parentWidget) {
+int scaper::uncheckall(QObject *parentWidget) {
     int rv = OK;
     QList<QCheckBox *>list = parentWidget->findChildren<QCheckBox *>();
     QCheckBox chk;
