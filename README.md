@@ -4,13 +4,9 @@ static code analysis project which supports multiple SCA tools with Qt GUI
 INSTALLATION:
 --
 clone git repo
-
 in source directory create a directory build/
-
 cd build/
-
 cmake ..
-
 make
 
 ---
