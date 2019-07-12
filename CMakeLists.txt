@@ -15,6 +15,8 @@ find_package(Qt5 COMPONENTS Widgets REQUIRED)
 # Populate a CMake variable with the sources
 set(SRCS
             main.cpp
+            dialog.cpp
+            scaper.cpp
             )
 #add  Qt .ui form data
 qt5_wrap_ui(SRCS scaper.ui)
