@@ -12,7 +12,7 @@ class ScaperDialog: public QDialog
     public:
         ScaperDialog(QWidget *parent = 0);
 
-        ScaperDialog(){}
+        ~ScaperDialog(){}
 
     private slots:
         void CheckAll();
@@ -23,6 +23,8 @@ class ScaperDialog: public QDialog
         QCheckBox *chkall;
         QCheckBox *unchkall;
         QPushButton *closeBtn;
+        QListWidgetItem *item;
+        
 };
 
 #endif
