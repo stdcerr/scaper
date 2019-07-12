@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1093</width>
-    <height>598</height>
+    <width>1091</width>
+    <height>596</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,7 +18,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -54,7 +54,7 @@
          </layout>
         </item>
         <item row="2" column="0">
-         <widget class="QPushButton" name="CheckPushButton">
+         <widget class="QPushButton" name="checkPushButton">
           <property name="text">
            <string>Check!</string>
           </property>
@@ -532,7 +532,7 @@
            <item row="0" column="2">
             <widget class="QPushButton" name="dialogPushButton">
              <property name="text">
-              <string>&amp;Dialog</string>
+              <string>Test Dialog</string>
              </property>
             </widget>
            </item>
@@ -551,7 +551,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1093</width>
+     <width>1091</width>
      <height>24</height>
     </rect>
    </property>

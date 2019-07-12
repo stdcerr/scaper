@@ -27,11 +27,14 @@ int main( int argc, char **argv )
     QObject::connect(ui.uncheckallPushButton, &QPushButton::clicked, [&] {
                 app->UnchckBtn();
     });
-    rv = QObject::connect(ui.pathtosplintPushButton, &QPushButton::clicked, [&] {
-                app->PthBtn();
+     QObject::connect(ui.pathtosplintPushButton, &QPushButton::clicked, [&] {
+                app->PthBtn(ui.pathtosplintLineEdit);
     });
-rv = QObject::connect(ui.dialogPushButton, &QPushButton::clicked, [&] {
+    QObject::connect(ui.dialogPushButton, &QPushButton::clicked, [&] {
                 app->DialogBtn();
+    });
+QObject::connect(ui.checkPushButton, &QPushButton::clicked, [&] {
+                app->ChckSCABtn();
     });
     if (!rv) {
         std::cerr << "connect() failed: rv:" << rv << std::endl;

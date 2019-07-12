@@ -24,10 +24,19 @@ void scaper::ChckBtn(void) {
 }
 //-------------------------------------------------------------------------------------------------
 
-void scaper::PthBtn(void) {
+void scaper::ChckSCABtn(void) {
     std::cout << "inside " << __func__ <<std::endl;
-    QString fname = QFileDialog::getOpenFileName(nullptr,
-        "Path to splint", "/usr/bin", "All Files (*.*)");
+    if (!runsca(ui.OutputTextEdit))
+        std::cout << "SCA invoked!" << std::endl;
+}
+//-------------------------------------------------------------------------------------------------
+
+void scaper::PthBtn(QLineEdit *edit) {
+    std::cout << "inside " << __func__ <<std::endl;
+    fname_set(QFileDialog::getOpenFileName(nullptr,
+        "Path to splint", "/usr/bin", "All Files (*.*)"));
+    if(edit)
+        edit->setText(fname_get());
 }
 //-------------------------------------------------------------------------------------------------
 
@@ -64,7 +73,10 @@ int scaper::dialogShow(QWidget *parent) {
     //dialog->show();
     ScaperDialog dialog(parent);
     dialog.show();
-
-
     return rv;
+}
+//-------------------------------------------------------------------------------------------------
+
+int scaper::runsca(QTextEdit *out) {
+
 }
