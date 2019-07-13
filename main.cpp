@@ -53,7 +53,7 @@ int main( int argc, char **argv )
 	QObject::connect(ui.checkPushButton, &QPushButton::clicked, [&] {
                 app->ChckSCABtn();
     });
-QObject::connect(ui.choosePushButton, &QPushButton::clicked, [&] {
+    rv = QObject::connect(ui.choosePushButton, &QPushButton::clicked, [&] {
                 app->ChooseBtn();
     });
     if (!rv) {
