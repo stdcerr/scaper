@@ -14,23 +14,55 @@
  * You should have received a copy of the GNU General Public License 
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-#include <QtGui>
+#include <iostream>
 #include <dialog.h>
+#include "scaper.h"
 
 
 ScaperDialog::ScaperDialog(QWidget *parent) :QDialog(parent) {
-
+	bool rv;
     int nWidth = 300;
     int nHeight = 300;
-	int WidX = 100;
-	int WidY = 100;
 	resize(nWidth, nHeight);
-
+    layout = new QVBoxLayout;
+	label = new QLabel;
+	label->setText("Test Configuration:");
 	list = new QListWidget(this);
-	list->setBaseSize(WidX,WidY);
-	item = new QListWidgetItem();
-	list->setItemWidget(item,new QCheckBox("checkBox"));
-	list->addItem(item);
+	item1 = new QListWidgetItem();
+	item2 = new QListWidgetItem();
+	item3 = new QListWidgetItem();
+	item4 = new QListWidgetItem();
+	item1->setFlags(item1->flags() | Qt::ItemIsUserCheckable);
+	item1->setCheckState(Qt::Unchecked);
+	list->setItemWidget(item1,new QCheckBox("checkBox1"));
+	list->setItemWidget(item2,new QCheckBox("checkBox2"));
+	list->setItemWidget(item3,new QCheckBox("checkBox3"));
+	list->setItemWidget(item4,new QCheckBox("checkBox4"));
+	list->addItem(item1);
+	list->addItem(item2);
+	list->addItem(item3);
+	list->addItem(item4);
+    closeBtn = new QPushButton("Close");
+	layout->addWidget(label);
+    layout->addWidget(list);
+    layout->addWidget(closeBtn);
+
+
+	rv = QObject::connect(this->closeBtn, &QPushButton::clicked, [&] {
+			 this->CloseDialog();
+	});
+    if (!rv) {
+        std::cerr << "connect() failed: rv:" << rv << std::endl;
+    }
+
+
+
+    this->setLayout(layout);
+}
+
+int ScaperDialog::CloseDialog(void) {
+	dbg_prnt << "inside " << __func__ << std::endl;
+	close();
 }
 
 void ScaperDialog::CheckAll(void){}

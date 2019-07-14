@@ -44,7 +44,7 @@ int main( int argc, char **argv )
     QObject::connect(ui.uncheckallPushButton, &QPushButton::clicked, [&] {
                 app->UnchckBtn();
     });
-     QObject::connect(ui.pathtosplintPushButton, &QPushButton::clicked, [&] {
+    QObject::connect(ui.pathtosplintPushButton, &QPushButton::clicked, [&] {
                 app->PthBtn(ui.pathtosplintLineEdit);
     });
     QObject::connect(ui.dialogPushButton, &QPushButton::clicked, [&] {

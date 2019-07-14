@@ -22,13 +22,14 @@
 #include "ui_scaper.h"
 #include "dialog.h"
 
-#ifdef USEDEBUG
-#define Debug(x) std::cout << (x)
+#define DEBUG
+
+#ifdef DEBUG
+#define dbg_prnt    std::cout
 #else
-
-#define Debug(x)
+#define dbg_prnt    std::cout.setstate(std::ios_base::badbit);\
+                    std::cout
 #endif
-
 
 #define OK      0
 #define ERROR   -1
@@ -46,13 +47,17 @@ class scaper {
 		int asm_cmd(QString &cmd);
         int runsca(QTextEdit*);
 		int CheckFilePath(QString path);
+		int CobfigGet(QStringList *con);
         QString fname;
         QStringList slst;
+		QStringList conf;
     public:
         void fname_set(const QString &s) { fname = s; }
         QString fname_get(void) const { return fname; }
         void srcs_set(const QStringList &l) { slst = l; }
         QStringList srcs_get(void) const { return slst; }
+		void conf_set(const QStringList &c) {conf = c; }
+		QStringList conf_get(void) const { return conf; }
         ~scaper(){}
         Ui::MainWindow ui;
     public slots:

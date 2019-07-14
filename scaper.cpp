@@ -23,24 +23,24 @@
 #include "scaper.h"
 
 void scaper::DialogBtn(void) {
-    std::cout << "inside " << __func__ <<std::endl;
+    dbg_prnt << "inside " << __func__ <<std::endl;
     if (!dialogShow(ui.centralwidget)) {
-        std::cout << "Testdialog showed!" << std::endl;
+        dbg_prnt << "Testdialog showed!" << std::endl;
     }
 }
 //-------------------------------------------------------------------------------------------------
 
 void scaper::UnchckBtn(void) {
-    std::cout << "inside " << __func__ <<std::endl;
+    dbg_prnt << "inside " << __func__ <<std::endl;
     if (!uncheckall(ui.SplintOptionsGroupBox))
-        std::cout << "all unchecked!" << std::endl;
+        dbg_prnt << "all unchecked!" << std::endl;
 }
 //-------------------------------------------------------------------------------------------------
 
 void scaper::ChckBtn(void) {
-    std::cout << "inside " << __func__ <<std::endl;
+    dbg_prnt << "inside " << __func__ <<std::endl;
 	if (!checkall(ui.SplintOptionsGroupBox))
-        std::cout << "all checked!" << std::endl;
+        dbg_prnt << "all checked!" << std::endl;
 	
 }
 //-------------------------------------------------------------------------------------------------
@@ -52,7 +52,7 @@ return (access(path.toLocal8Bit().constData(), X_OK) == OK) ? OK : ERROR;
 //-------------------------------------------------------------------------------------------------
 
 void scaper::ChooseBtn(void) {
-    std::cout << "inside " << __func__ <<std::endl;
+    dbg_prnt << "inside " << __func__ <<std::endl;
 	QFileDialog dialog(nullptr);
 	QString dir = QDir::currentPath();
 	dialog.setDirectory(dir);
@@ -65,22 +65,24 @@ void scaper::ChooseBtn(void) {
 
 void scaper::ChckSCABtn(void) {
 	QString cmd; 
-    std::cout << "inside " << __func__ <<std::endl;
+    dbg_prnt << "inside " << __func__ <<std::endl;
 	if (CheckFilePath(fname_get())) {
 		std::cerr << "Error: check permissions of selected binary. Exit" << std::endl;
 		exit(ERROR);
 		}
-	std::cout << "OK"<< std::endl;
+	dbg_prnt << "OK"<< std::endl;
 	asm_cmd(cmd);
+	dbg_prnt << "cmd: " << cmd.toStdString() << std::endl;
+
 	if (!runsca(ui.OutputTextEdit))
-		std::cout << "SCA invoked!" << std::endl;
+		dbg_prnt << "SCA invoked!" << std::endl;
 
 
     }
 //-------------------------------------------------------------------------------------------------
 
 void scaper::PthBtn(QLineEdit *edit) {
-    std::cout << "inside " << __func__ <<std::endl;
+    dbg_prnt << "inside " << __func__ <<std::endl;
     fname_set(QFileDialog::getOpenFileName(nullptr,
         "Path to splint", "/usr/bin", "All Files (*.*)"));
     if(edit)
@@ -91,10 +93,9 @@ void scaper::PthBtn(QLineEdit *edit) {
 int scaper::checkall(QObject *parentWidget) {
     int rv = OK;
     QList<QCheckBox *>list = parentWidget->findChildren<QCheckBox *>();
-    QCheckBox chk;
     QList<QCheckBox *>::iterator i;
     for(i = list.begin();i != list.end(); i++) {
-        std::cout <<(*i)->text().toStdString() << std::endl;
+        dbg_prnt <<(*i)->text().toStdString() << std::endl;
         (*i)->setChecked(true);
     }
     return rv;
@@ -104,10 +105,9 @@ int scaper::checkall(QObject *parentWidget) {
 int scaper::uncheckall(QObject *parentWidget) {
     int rv = OK;
     QList<QCheckBox *>list = parentWidget->findChildren<QCheckBox *>();
-    QCheckBox chk;
     QList<QCheckBox *>::iterator i;
     for(i = list.begin();i != list.end(); i++) {
-        std::cout << (*i)->text().toStdString() << std::endl;
+        dbg_prnt << (*i)->text().toStdString() << std::endl;
         (*i)->setChecked(false);
     }
     return rv;
@@ -116,7 +116,7 @@ int scaper::uncheckall(QObject *parentWidget) {
 
 int scaper::dialogShow(QWidget *parent) {
     int rv = OK;
-    std::cout << "inside " << __func__ <<std::endl;
+    dbg_prnt << "inside " << __func__ <<std::endl;
     //ScaperDialog *dialog = ScaperDialog(parent);
     //dialog->show();
     ScaperDialog dialog(parent);
@@ -126,10 +126,22 @@ int scaper::dialogShow(QWidget *parent) {
 //-------------------------------------------------------------------------------------------------
 
 int scaper::asm_cmd(QString &cmd) {
-
+	int rv = OK;
+	cmd = fname_get();
+	// TODO: include all the options
+	QStringList sources = srcs_get();
+	for ( const auto& i : sources )
+		cmd.append(" "+i);
+	return rv;
 }
 //-------------------------------------------------------------------------------------------------
 
 int scaper::runsca(QTextEdit *out) {
+	int rv = OK;
+	return rv;
+}
 
+int scaper::CobfigGet(QStringList *con) {
+	int rv = OK;
+	return rv;
 }

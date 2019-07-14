@@ -21,6 +21,9 @@
 #include <QtWidgets/QListWidget>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QPushButton>
+#include <QtGui>
+#include <QVBoxLayout>
+#include <QtWidgets/QLabel>
 
 class ScaperDialog: public QDialog
 {
@@ -33,13 +36,19 @@ class ScaperDialog: public QDialog
     private slots:
         void CheckAll();
         void UncheckAll();
+		int CloseDialog();
 
     private:
+		QVBoxLayout *layout;
+		QLabel *label;
         QListWidget *list;
-        QCheckBox *chkall;
-        QCheckBox *unchkall;
+        QListWidgetItem *item1;
+        QListWidgetItem *item2;
+        QListWidgetItem *item3;
+        QListWidgetItem *item4;
+        //QCheckBox *chkall;
+        //QCheckBox *unchkall;
         QPushButton *closeBtn;
-        QListWidgetItem *item;
         
 };
 
