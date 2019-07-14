@@ -60,6 +60,7 @@ class scaper {
 		QStringList conf_get(void) const { return conf; }
         ~scaper(){}
         Ui::MainWindow ui;
+		QProcess *proc;
     public slots:
         void ChckBtn(void);
         void UnchckBtn(void);
@@ -67,6 +68,8 @@ class scaper {
         void DialogBtn(void);
         void ChooseBtn(void);
         void ChckSCABtn(void);
+		void updateError(void);
+        void updateText(void);
 };
 
 

@@ -30,12 +30,14 @@
 int main( int argc, char **argv )
 {
     QApplication a( argc, argv );
+	QProcess *proc = new QProcess;
     QMainWindow *widget = new QMainWindow;
     scaper *app = new scaper();
-	LoadDefaults(app)
+	LoadDefaults(app);	
     Ui::MainWindow ui;
 
     ui.setupUi(widget);
+	app->proc = proc;
     app->ui = ui;
     bool rv = OK;
     QObject::connect(ui.checkallPushButton, &QPushButton::clicked, [&] {
@@ -53,9 +55,16 @@ int main( int argc, char **argv )
 	QObject::connect(ui.checkPushButton, &QPushButton::clicked, [&] {
                 app->ChckSCABtn();
     });
-    rv = QObject::connect(ui.choosePushButton, &QPushButton::clicked, [&] {
+    QObject::connect(ui.choosePushButton, &QPushButton::clicked, [&] {
                 app->ChooseBtn();
     });
+	//QObject::connect(proc, SIGNAL(readyReadStdError()), this, SLOT(updateError()));
+	QObject::connect(proc, &QProcess::readyReadStandardError, [&] {
+				app->updateError();
+	});
+	rv = QObject::connect(proc, &QProcess::readyReadStandardOutput, [&] {
+				app->updateText();
+	});
     if (!rv) {
         std::cerr << "connect() failed: rv:" << rv << std::endl;
     }

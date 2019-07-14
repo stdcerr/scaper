@@ -81,6 +81,16 @@ void scaper::ChckSCABtn(void) {
     }
 //-------------------------------------------------------------------------------------------------
 
+void scaper:: updateError(void) {
+    dbg_prnt << "inside " << __func__ <<std::endl;
+}
+//-------------------------------------------------------------------------------------------------
+
+void scaper:: updateText(void) {
+    dbg_prnt << "inside " << __func__ <<std::endl;
+}
+//-------------------------------------------------------------------------------------------------
+
 void scaper::PthBtn(QLineEdit *edit) {
     dbg_prnt << "inside " << __func__ <<std::endl;
     fname_set(QFileDialog::getOpenFileName(nullptr,
@@ -138,10 +148,13 @@ int scaper::asm_cmd(QString &cmd) {
 
 int scaper::runsca(QTextEdit *out) {
 	int rv = OK;
+    dbg_prnt << "inside " << __func__ <<std::endl;
+	proc->start("/usr/bin/ls -l");
 	return rv;
 }
 
 int scaper::CobfigGet(QStringList *con) {
 	int rv = OK;
+    dbg_prnt << "inside " << __func__ <<std::endl;
 	return rv;
 }
