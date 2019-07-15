@@ -27,25 +27,29 @@ ScaperDialog::ScaperDialog(QWidget *parent) :QDialog(parent) {
 	resize(nWidth, nHeight);
     layout = new QVBoxLayout;
 	label = new QLabel;
+    QString optnsf = "splint_options";
 	
 	label->setText("Test Configuration:");
 
-	std::ifstream ifs("splint_options");
+	std::ifstream ifs(optnsf);
 
 	std::string line;
 	if(!ifs.is_open()) {
-	std::cerr << "Resource file not found " << std::endl;
+	std::cerr << "Resource file \"" << optnsf << "\" not found, exit " << std::endl;
+    exit(0);
 	}
 
 	while (std::getline(ifs, line)) {
 	dbg_prnt << line << std::endl;
-	}
+	
 	list = new QListWidget(this);
 	item = new QListWidgetItem();
 	item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
 	item->setCheckState(Qt::Unchecked);
-	list->setItemWidget(item,new QCheckBox("checkBox"));
+    item->setText(QString::FromStdString(line));
+	//list->setItemWidget(item,new QCheckBox("checkBox"));
 	list->addItem(item);
+    }
     closeBtn = new QPushButton("Close");
 	layout->addWidget(label);
     layout->addWidget(list);
