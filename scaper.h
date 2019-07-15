@@ -35,7 +35,8 @@
 #define ERROR   -1
 
 #define DFLTPATH	"/usr/bin/splint"
-#define LoadDefaults(x) (x)->fname_set(DFLTPATH);
+#define LoadDefaults(a,u) (a)->fname_set(DFLTPATH);\
+						  (u).pathtosplintLineEdit->setText((a)->fname_get());
 
 class scaper {
     private:
@@ -45,7 +46,7 @@ class scaper {
         int check(QWidget*);
 		int choose (QWidget*);
 		int asm_cmd(QString &cmd);
-        int runsca(QTextEdit*);
+        int runsca(QString&);
 		int CheckFilePath(QString path);
 		int CobfigGet(QStringList *con);
         QString fname;
@@ -68,8 +69,8 @@ class scaper {
         void DialogBtn(void);
         void ChooseBtn(void);
         void ChckSCABtn(void);
-		void updateError(void);
-        void updateText(void);
+		void updateError(QProcess*);
+        void updateText(QProcess*);
 };
 
 

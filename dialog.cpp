@@ -15,6 +15,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 #include <iostream>
+#include <fstream>
 #include <dialog.h>
 #include "scaper.h"
 
@@ -26,22 +27,25 @@ ScaperDialog::ScaperDialog(QWidget *parent) :QDialog(parent) {
 	resize(nWidth, nHeight);
     layout = new QVBoxLayout;
 	label = new QLabel;
+	
 	label->setText("Test Configuration:");
+
+	std::ifstream ifs("splint_options");
+
+	std::string line;
+	if(!ifs.is_open()) {
+	std::cerr << "Resource file not found " << std::endl;
+	}
+
+	while (std::getline(ifs, line)) {
+	dbg_prnt << line << std::endl;
+	}
 	list = new QListWidget(this);
-	item1 = new QListWidgetItem();
-	item2 = new QListWidgetItem();
-	item3 = new QListWidgetItem();
-	item4 = new QListWidgetItem();
-	item1->setFlags(item1->flags() | Qt::ItemIsUserCheckable);
-	item1->setCheckState(Qt::Unchecked);
-	list->setItemWidget(item1,new QCheckBox("checkBox1"));
-	list->setItemWidget(item2,new QCheckBox("checkBox2"));
-	list->setItemWidget(item3,new QCheckBox("checkBox3"));
-	list->setItemWidget(item4,new QCheckBox("checkBox4"));
-	list->addItem(item1);
-	list->addItem(item2);
-	list->addItem(item3);
-	list->addItem(item4);
+	item = new QListWidgetItem();
+	item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
+	item->setCheckState(Qt::Unchecked);
+	list->setItemWidget(item,new QCheckBox("checkBox"));
+	list->addItem(item);
     closeBtn = new QPushButton("Close");
 	layout->addWidget(label);
     layout->addWidget(list);

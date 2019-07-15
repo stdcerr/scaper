@@ -42,10 +42,7 @@ class ScaperDialog: public QDialog
 		QVBoxLayout *layout;
 		QLabel *label;
         QListWidget *list;
-        QListWidgetItem *item1;
-        QListWidgetItem *item2;
-        QListWidgetItem *item3;
-        QListWidgetItem *item4;
+        QListWidgetItem *item;
         //QCheckBox *chkall;
         //QCheckBox *unchkall;
         QPushButton *closeBtn;

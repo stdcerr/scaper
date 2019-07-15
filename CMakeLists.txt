@@ -11,6 +11,9 @@ set(CMAKE_AUTOMOC ON)
 
 # Find the QtWidgets library
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
+#copy the resource file that specifies the splint options
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/splint_options
+     DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
 # Populate a CMake variable with the sources
 set(SRCS

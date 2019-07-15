@@ -74,20 +74,24 @@ void scaper::ChckSCABtn(void) {
 	asm_cmd(cmd);
 	dbg_prnt << "cmd: " << cmd.toStdString() << std::endl;
 
-	if (!runsca(ui.OutputTextEdit))
+	if (!runsca(cmd))
 		dbg_prnt << "SCA invoked!" << std::endl;
 
 
     }
 //-------------------------------------------------------------------------------------------------
 
-void scaper:: updateError(void) {
+void scaper:: updateError(QProcess *proc) {
     dbg_prnt << "inside " << __func__ <<std::endl;
+	QByteArray dat = proc->readAllStandardError();
+	ui.outputTextEdit->append(QString(dat));
 }
 //-------------------------------------------------------------------------------------------------
 
-void scaper:: updateText(void) {
+void scaper:: updateText(QProcess *proc) {
     dbg_prnt << "inside " << __func__ <<std::endl;
+	QByteArray dat = proc->readAllStandardOutput();
+	ui.outputTextEdit->append(QString(dat));
 }
 //-------------------------------------------------------------------------------------------------
 
@@ -146,12 +150,13 @@ int scaper::asm_cmd(QString &cmd) {
 }
 //-------------------------------------------------------------------------------------------------
 
-int scaper::runsca(QTextEdit *out) {
+int scaper::runsca(QString &cmd) {
 	int rv = OK;
     dbg_prnt << "inside " << __func__ <<std::endl;
-	proc->start("/usr/bin/ls -l");
+	(void)proc->start(cmd);
 	return rv;
 }
+//-------------------------------------------------------------------------------------------------
 
 int scaper::CobfigGet(QStringList *con) {
 	int rv = OK;
