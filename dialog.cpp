@@ -39,16 +39,16 @@ ScaperDialog::ScaperDialog(QWidget *parent) :QDialog(parent) {
     exit(0);
 	}
 
-	while (std::getline(ifs, line)) {
-	dbg_prnt << line << std::endl;
-	
 	list = new QListWidget(this);
-	item = new QListWidgetItem();
-	item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
-	item->setCheckState(Qt::Unchecked);
-   item->setText(QString::fromStdString(line));
-	//list->setItemWidget(item,new QCheckBox("checkBox"));
-	list->addItem(item);
+	while (std::getline(ifs, line)) {
+		//dbg_prnt << line << std::endl;
+		
+		item = new QListWidgetItem();
+		item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
+		item->setCheckState(Qt::Unchecked);
+    	item->setText(QString::fromStdString(line));
+		//list->setItemWidget(item,new QCheckBox("checkBox"));
+		list->addItem(item);
     }
     closeBtn = new QPushButton("Close");
 	layout->addWidget(label);
