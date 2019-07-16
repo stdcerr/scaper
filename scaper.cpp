@@ -133,7 +133,8 @@ int scaper::dialogShow(QWidget *parent) {
     dbg_prnt << "inside " << __func__ <<std::endl;
     //ScaperDialog *dialog = ScaperDialog(parent);
     //dialog->show();
-    ScaperDialog dialog(parent);
+    ScaperDialog *inst = ScaperDialog dialog(parent,this,"splint");
+	
     dialog.exec();
     return rv;
 }

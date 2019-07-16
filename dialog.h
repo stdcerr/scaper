@@ -24,13 +24,13 @@
 #include <QtGui>
 #include <QVBoxLayout>
 #include <QtWidgets/QLabel>
+#include "scaper.h"
 
 class ScaperDialog: public QDialog
 {
     Q_OBJECT
     public:
-        ScaperDialog(QWidget *parent = 0);
-
+        ScaperDialog(QWidget *parent = 0, void *p = nullptr, QString title = "");
         ~ScaperDialog(){}
 
     private slots:
@@ -40,7 +40,9 @@ class ScaperDialog: public QDialog
 
     private:
 		QVBoxLayout *layout;
-		QLabel *label;
+		QLabel *mlab;
+		QLabel *blab;
+		QLineEdit *binpth;
         QListWidget *list;
         QListWidgetItem *item;
         //QCheckBox *chkall;

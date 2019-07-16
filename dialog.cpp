@@ -16,20 +16,25 @@
  */
 #include <iostream>
 #include <fstream>
-#include <dialog.h>
-#include "scaper.h"
+#include "dialog.h"
 
 
-ScaperDialog::ScaperDialog(QWidget *parent) :QDialog(parent) {
+ScaperDialog::ScaperDialog(QWidget *parent, void *p, QString title) :QDialog(parent) {
 	bool rv;
     int nWidth = 300;
     int nHeight = 300;
 	resize(nWidth, nHeight);
     layout = new QVBoxLayout;
-	label = new QLabel;
+	mlab = new QLabel;
+	blab = new QLabel;
+	binpth  = new QLineEdit;
     QString optnsf = "splint_options";
 	
-	label->setText("Test Configuration:");
+	mlab->setText(title+" configuration:");
+	mlab->setText("binary:");
+
+	if(p)
+	binpth->setText(scaper*)p->fname_get());
 
 	std::ifstream ifs(optnsf.toUtf8());
 
@@ -51,7 +56,9 @@ ScaperDialog::ScaperDialog(QWidget *parent) :QDialog(parent) {
 		list->addItem(item);
     }
     closeBtn = new QPushButton("Close");
-	layout->addWidget(label);
+	layout->addWidget(mlab);
+	layout->addWidget(blab);
+	layout->addWidget(binpth);
     layout->addWidget(list);
     layout->addWidget(closeBtn);
 
