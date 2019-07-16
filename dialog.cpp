@@ -31,11 +31,11 @@ ScaperDialog::ScaperDialog(QWidget *parent) :QDialog(parent) {
 	
 	label->setText("Test Configuration:");
 
-	std::ifstream ifs(optnsf);
+	std::ifstream ifs(optnsf.toUtf8());
 
 	std::string line;
 	if(!ifs.is_open()) {
-	std::cerr << "Resource file \"" << optnsf << "\" not found, exit " << std::endl;
+	std::cerr << "Resource file \"" << std::string(optnsf.toUtf8()) << "\" not found, exit " << std::endl;
     exit(0);
 	}
 
@@ -46,7 +46,7 @@ ScaperDialog::ScaperDialog(QWidget *parent) :QDialog(parent) {
 	item = new QListWidgetItem();
 	item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
 	item->setCheckState(Qt::Unchecked);
-    item->setText(QString::FromStdString(line));
+   item->setText(QString::fromStdString(line));
 	//list->setItemWidget(item,new QCheckBox("checkBox"));
 	list->addItem(item);
     }
