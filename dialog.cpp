@@ -17,9 +17,10 @@
 #include <iostream>
 #include <fstream>
 #include "dialog.h"
+#include "scaper.h"
 
 
-ScaperDialog::ScaperDialog(QWidget *parent, void *p, QString title) :QDialog(parent) {
+ScaperDialog::ScaperDialog(QWidget *parent) :QDialog(parent) {
 	bool rv;
     int nWidth = 300;
     int nHeight = 300;
@@ -29,12 +30,15 @@ ScaperDialog::ScaperDialog(QWidget *parent, void *p, QString title) :QDialog(par
 	blab = new QLabel;
 	binpth  = new QLineEdit;
     QString optnsf = "splint_options";
+    closeBtn = new QPushButton("Close");
+    chooseBtn = new QPushButton("Choose");
+    checkallBtn = new QPushButton("Check all");
+    uncheckallBtn = new QPushButton("Uncheck all");
+    hbox = new QHBoxLayout;
+    chckbox = new QHBoxLayout;
 	
-	mlab->setText(title+" configuration:");
-	mlab->setText("binary:");
-
-	if(p)
-	binpth->setText(scaper*)p->fname_get());
+	mlab->setText("Configuration:");
+	blab->setText("Path:");
 
 	std::ifstream ifs(optnsf.toUtf8());
 
@@ -45,25 +49,32 @@ ScaperDialog::ScaperDialog(QWidget *parent, void *p, QString title) :QDialog(par
 	}
 
 	list = new QListWidget(this);
-	while (std::getline(ifs, line)) {
-		//dbg_prnt << line << std::endl;
-		
+	while (std::getline(ifs, line)) {// loop over in config file
 		item = new QListWidgetItem();
 		item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
 		item->setCheckState(Qt::Unchecked);
     	item->setText(QString::fromStdString(line));
-		//list->setItemWidget(item,new QCheckBox("checkBox"));
 		list->addItem(item);
-    }
-    closeBtn = new QPushButton("Close");
+    }	
 	layout->addWidget(mlab);
-	layout->addWidget(blab);
-	layout->addWidget(binpth);
+	hbox->addWidget(blab);
+	hbox->addWidget(binpth);
+	hbox->addWidget(chooseBtn);
+	layout->addLayout(hbox);
     layout->addWidget(list);
+	chckbox->addWidget(checkallBtn);
+	chckbox->addWidget(uncheckallBtn);
+	layout->addLayout(chckbox);
     layout->addWidget(closeBtn);
 
 
 	rv = QObject::connect(this->closeBtn, &QPushButton::clicked, [&] {
+	QSettings *sttngs = new QSettings(QSettings::NativeFormat,QSettings::UserScope,"GNU","SCAPER",parent);
+
+	sttngs->beginGroup("dialogbox");
+	sttngs->setValue("size", this->size());
+	sttngs->endGroup();
+			 delete sttngs;
 			 this->CloseDialog();
 	});
     if (!rv) {
@@ -76,9 +87,11 @@ ScaperDialog::ScaperDialog(QWidget *parent, void *p, QString title) :QDialog(par
 }
 
 int ScaperDialog::CloseDialog(void) {
-	dbg_prnt << "inside " << __func__ << std::endl;
 	close();
 }
-
+void ScaperDialog::TextSet(QString txt) {
+	binpth->setText(txt);
+	}
 void ScaperDialog::CheckAll(void){}
 void ScaperDialog::UncheckAll(void){}
+

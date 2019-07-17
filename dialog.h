@@ -30,7 +30,9 @@ class ScaperDialog: public QDialog
 {
     Q_OBJECT
     public:
-        ScaperDialog(QWidget *parent = 0, void *p = nullptr, QString title = "");
+        ScaperDialog(QWidget *parent = 0);
+		void fname_set (const QString &s) {fname = s;TextSet(s);}
+		QString fname_get(void) const {return fname;}
         ~ScaperDialog(){}
 
     private slots:
@@ -39,15 +41,24 @@ class ScaperDialog: public QDialog
 		int CloseDialog();
 
     private:
+		QString fname;
 		QVBoxLayout *layout;
 		QLabel *mlab;
 		QLabel *blab;
+
 		QLineEdit *binpth;
         QListWidget *list;
         QListWidgetItem *item;
         //QCheckBox *chkall;
         //QCheckBox *unchkall;
         QPushButton *closeBtn;
+        QPushButton *chooseBtn;
+        QPushButton *checkallBtn;
+        QPushButton *uncheckallBtn;
+		QHBoxLayout *hbox;
+		QHBoxLayout *chckbox;
+
+		void TextSet(QString);
         
 };
 

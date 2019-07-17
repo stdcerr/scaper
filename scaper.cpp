@@ -131,11 +131,9 @@ int scaper::uncheckall(QObject *parentWidget) {
 int scaper::dialogShow(QWidget *parent) {
     int rv = OK;
     dbg_prnt << "inside " << __func__ <<std::endl;
-    //ScaperDialog *dialog = ScaperDialog(parent);
-    //dialog->show();
-    ScaperDialog *inst = ScaperDialog dialog(parent,this,"splint");
-	
-    dialog.exec();
+    ScaperDialog splintDia(parent);
+	splintDia.fname_set(this->fname_get());
+    splintDia.exec();
     return rv;
 }
 //-------------------------------------------------------------------------------------------------
