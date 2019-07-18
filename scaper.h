@@ -37,6 +37,8 @@
 #define DFLTPATH	"/usr/bin/splint"
 #define LoadDefaults(a,u) (a)->fname_set(DFLTPATH);\
 						  (u).pathtosplintLineEdit->setText((a)->fname_get());
+class ScaperDialog;		// foward declaration
+
 
 class scaper {
     private:
@@ -52,6 +54,13 @@ class scaper {
         QString fname;
         QStringList slst;
 		QStringList conf;
+		struct sca_dat {
+			QWidget *parent;
+			ScaperDialog *dialog;
+			QString name;
+			QString fname;
+			};
+	 	int DialogShow(sca_dat&);
     public:
         void fname_set(const QString &s) { fname = s; }
         QString fname_get(void) const { return fname; }

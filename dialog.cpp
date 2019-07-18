@@ -69,12 +69,6 @@ ScaperDialog::ScaperDialog(QWidget *parent) :QDialog(parent) {
 
 
 	rv = QObject::connect(this->closeBtn, &QPushButton::clicked, [&] {
-	QSettings *sttngs = new QSettings(QSettings::NativeFormat,QSettings::UserScope,"GNU","SCAPER",parent);
-
-	sttngs->beginGroup("dialogbox");
-	sttngs->setValue("size", this->size());
-	sttngs->endGroup();
-			 delete sttngs;
 			 this->CloseDialog();
 	});
     if (!rv) {
@@ -87,6 +81,18 @@ ScaperDialog::ScaperDialog(QWidget *parent) :QDialog(parent) {
 }
 
 int ScaperDialog::CloseDialog(void) {
+	QSettings *sttngs = new QSettings(QSettings::NativeFormat,QSettings::UserScope,"GNU","SCAPER",nullptr);
+
+	sttngs->beginGroup(nme_get());
+	sttngs->setValue("size", this->size());
+	sttngs->endGroup();
+	sttngs->beginGroup("tooloptions");
+	QListWidget *wdgt = this->findChild<QListWidget *>();
+	
+
+
+	 delete sttngs;
+
 	close();
 }
 void ScaperDialog::TextSet(QString txt) {

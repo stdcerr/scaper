@@ -33,6 +33,8 @@ class ScaperDialog: public QDialog
         ScaperDialog(QWidget *parent = 0);
 		void fname_set (const QString &s) {fname = s;TextSet(s);}
 		QString fname_get(void) const {return fname;}
+		void nme_set(const QString &s) {SCAnme = s;}
+		QString nme_get(void) {return SCAnme;}
         ~ScaperDialog(){}
 
     private slots:
@@ -41,6 +43,7 @@ class ScaperDialog: public QDialog
 		int CloseDialog();
 
     private:
+		QString SCAnme;
 		QString fname;
 		QVBoxLayout *layout;
 		QLabel *mlab;

@@ -22,11 +22,16 @@
 #include "ui_scaper.h"
 #include "scaper.h"
 
+
+//-------------------------------------------------------------------------------------------------
+
 void scaper::DialogBtn(void) {
     dbg_prnt << "inside " << __func__ <<std::endl;
-    if (!dialogShow(ui.centralwidget)) {
-        dbg_prnt << "Testdialog showed!" << std::endl;
-    }
+	sca_dat splint;
+	splint.parent = ui.centralwidget;
+	splint.name = "Splint";
+	splint.fname = fname_get();
+	this->DialogShow(splint);
 }
 //-------------------------------------------------------------------------------------------------
 
@@ -128,11 +133,25 @@ int scaper::uncheckall(QObject *parentWidget) {
 }
 //-------------------------------------------------------------------------------------------------
 
+int scaper::DialogShow(sca_dat &data) {
+	int rv = OK;
+
+	ScaperDialog *inst = new  ScaperDialog(data.parent);
+	inst->fname_set(data.name);
+	inst->nme_set(data.name);
+	data.dialog = inst;
+	inst->exec();
+
+	return rv;
+}
+//-------------------------------------------------------------------------------------------------
+
 int scaper::dialogShow(QWidget *parent) {
     int rv = OK;
     dbg_prnt << "inside " << __func__ <<std::endl;
     ScaperDialog splintDia(parent);
-	splintDia.fname_set(this->fname_get());
+	splintDia.fname_set("Splint");	
+	splintDia.nme_set(this->fname_get());
     splintDia.exec();
     return rv;
 }
