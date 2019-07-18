@@ -87,7 +87,12 @@ int ScaperDialog::CloseDialog(void) {
 	sttngs->setValue("size", this->size());
 	sttngs->endGroup();
 	sttngs->beginGroup("tooloptions");
-	QListWidget *wdgt = this->findChild<QListWidget *>();
+
+	for (int i =0; i< list->count(); i++) {
+		QListWidgetItem* row = list->item(i);
+		dbg_prnt << "item " << i << " " << row->text(); <<std::endl;
+
+	}
 	
 
 
