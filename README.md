@@ -1,5 +1,5 @@
 # SCAPER
-*SCAPER: Static Code Analysis Project Eggler Ron*
+*SCAPER: Static Code Analysis Project, Eggler Ron*
 
 static code analysis project thatr supports multiple SCA tools with Qt GUI, direct patch piping, cmd line as well as graphical Qt based interface.
 
