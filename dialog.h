@@ -18,6 +18,7 @@
 #define __DIALOG_H__
 
 #include <QtWidgets/QDialog>
+#include <QtWidgets/QFileDialog>
 #include <QtWidgets/QListWidget>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QPushButton>
@@ -38,9 +39,10 @@ class ScaperDialog: public QDialog
         ~ScaperDialog(){}
 
     private slots:
-        void CheckAll();
-        void UncheckAll();
-		int CloseDialog();
+        void CheckAll(void);
+        void UncheckAll(void);
+		void CloseDialog(void);
+		void ChooseBin(void);
 
     private:
 		QString SCAnme;

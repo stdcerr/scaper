@@ -35,8 +35,7 @@
 #define ERROR   -1
 
 #define DFLTPATH	"/usr/bin/splint"
-#define LoadDefaults(a,u) (a)->fname_set(DFLTPATH);\
-						  (u).pathtosplintLineEdit->setText((a)->fname_get());
+#define LoadDefaults(a,u) (a)->fname_set(DFLTPATH);
 class ScaperDialog;		// foward declaration
 
 
@@ -75,7 +74,7 @@ class scaper {
         void ChckBtn(void);
         void UnchckBtn(void);
         void PthBtn(QLineEdit*);
-        void DialogBtn(void);
+        void SplintDialogBtn(void);
         void ChooseBtn(void);
         void ChckSCABtn(void);
 		void updateError(QProcess*);

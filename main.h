@@ -17,6 +17,8 @@
 #ifndef __MAIN_H__
 #define __MAIN_H__
 
+#include <stdio.h>
+#include <unistd.h>
 #include <QObject>
 #include <qapplication.h>
 #include <QtWidgets/QPushButton>
@@ -32,6 +34,7 @@
     QMainWindow *widget;
     scaper *app;
     Ui::MainWindow ui;
+	int int_opt(int argc, char *argv[]);
 
 	//void setupslots(scaper&, Ui::Mainwindow&);
 

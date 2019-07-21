@@ -36,26 +36,36 @@ ScaperDialog::ScaperDialog(QWidget *parent) :QDialog(parent) {
     uncheckallBtn = new QPushButton("Uncheck all");
     hbox = new QHBoxLayout;
     chckbox = new QHBoxLayout;
-	
+
 	mlab->setText("Configuration:");
 	blab->setText("Path:");
 
-	std::ifstream ifs(optnsf.toUtf8());
+	// define slots
+	rv = QObject::connect(this->chooseBtn, &QPushButton::clicked, [&] { this->ChooseBin();	 });
+    if (!rv) {std::cerr << "connect() failed: rv:" << rv << std::endl;}
+rv = QObject::connect(this->uncheckallBtn, &QPushButton::clicked, [&] { this->UncheckAll();	 });
+    if (!rv) {std::cerr << "connect() failed: rv:" << rv << std::endl;}
+	rv = QObject::connect(this->checkallBtn, &QPushButton::clicked, [&] { this->CheckAll();	 });
+    if (!rv) {std::cerr << "connect() failed: rv:" << rv << std::endl;}
+	rv = QObject::connect(this->closeBtn, &QPushButton::clicked, [&] { this->CloseDialog();	 });
+    if (!rv) {std::cerr << "connect() failed: rv:" << rv << std::endl;}
 
-	std::string line;
-	if(!ifs.is_open()) {
-	std::cerr << "Resource file \"" << std::string(optnsf.toUtf8()) << "\" not found, exit " << std::endl;
-    exit(0);
-	}
+//--------------------------------------------------------------------------------------------------------
 
+	QSettings *sttngs = new QSettings(QSettings::NativeFormat,QSettings::UserScope,"GNU","SCAPER",nullptr);
+	nme_set(sttngs->value("name").toString());
+	fname_set(sttngs->value("path").toString());
+	sttngs->beginGroup("tooloptions");
+		
 	list = new QListWidget(this);
-	while (std::getline(ifs, line)) {// loop over in config file
-		item = new QListWidgetItem();
+	foreach(const QString &key, sttngs->childKeys()) {
+		item = new QListWidgetItem(list);
 		item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
-		item->setCheckState(Qt::Unchecked);
-    	item->setText(QString::fromStdString(line));
+		Qt::CheckState state = (Qt::CheckState) sttngs->value(key).toInt();
+		item->setCheckState(state);
+		item->setText(key);
 		list->addItem(item);
-    }	
+	}
 	layout->addWidget(mlab);
 	hbox->addWidget(blab);
 	hbox->addWidget(binpth);
@@ -68,30 +78,35 @@ ScaperDialog::ScaperDialog(QWidget *parent) :QDialog(parent) {
     layout->addWidget(closeBtn);
 
 
-	rv = QObject::connect(this->closeBtn, &QPushButton::clicked, [&] {
-			 this->CloseDialog();
-	});
-    if (!rv) {
-        std::cerr << "connect() failed: rv:" << rv << std::endl;
-    }
-
 
 
     this->setLayout(layout);
 }
+//-------------------------------------------------------------------------------------------------
 
-int ScaperDialog::CloseDialog(void) {
+void ScaperDialog::CheckAll(void) {
+    dbg_prnt << "inside " << __func__ <<std::endl;
+}
+//-------------------------------------------------------------------------------------------------
+
+void ScaperDialog::UncheckAll(void) {
+    dbg_prnt << "inside " << __func__ <<std::endl;
+}
+//-------------------------------------------------------------------------------------------------
+
+void ScaperDialog::CloseDialog(void) {
 	QSettings *sttngs = new QSettings(QSettings::NativeFormat,QSettings::UserScope,"GNU","SCAPER",nullptr);
-
-	sttngs->beginGroup(nme_get());
+	sttngs->beginGroup("global");
+	sttngs->setValue("name",nme_get());
+	sttngs->setValue("path",fname_get());
+	dbg_prnt << "fname: " << fname_get().toStdString() <<std::endl;
 	sttngs->setValue("size", this->size());
 	sttngs->endGroup();
 	sttngs->beginGroup("tooloptions");
 
 	for (int i =0; i< list->count(); i++) {
 		QListWidgetItem* row = list->item(i);
-		dbg_prnt << "item " << i << " " << row->text(); <<std::endl;
-
+		sttngs->setValue(row->text(),row->checkState());
 	}
 	
 
@@ -100,9 +115,17 @@ int ScaperDialog::CloseDialog(void) {
 
 	close();
 }
+//-------------------------------------------------------------------------------------------------
+
+void ScaperDialog::ChooseBin(void) {
+    dbg_prnt << "inside " << __func__ <<std::endl;
+    fname_set(QFileDialog::getOpenFileName(nullptr,
+        "Path to splint", "/usr/bin", "All Files (*.*)"));
+}
+//-------------------------------------------------------------------------------------------------
+
 void ScaperDialog::TextSet(QString txt) {
 	binpth->setText(txt);
-	}
-void ScaperDialog::CheckAll(void){}
-void ScaperDialog::UncheckAll(void){}
+}
+//-------------------------------------------------------------------------------------------------
 

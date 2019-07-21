@@ -26,6 +26,7 @@
 #include "ui_scaper.h"
 #include "scaper.h"
 #include "dialog.h"
+#include "main.h"
 
 int main( int argc, char **argv )
 {
@@ -35,28 +36,18 @@ int main( int argc, char **argv )
     scaper *app = new scaper;
     Ui::MainWindow ui;
 
+	int_opt(argc, argv);
+
     ui.setupUi(widget);
 	LoadDefaults(app,ui);
 	app->proc = proc;
     app->ui = ui;
     bool rv = OK;
-    QObject::connect(ui.checkallPushButton, &QPushButton::clicked, [&] {
-                app->ChckBtn();
-    });
-    QObject::connect(ui.uncheckallPushButton, &QPushButton::clicked, [&] {
-                app->UnchckBtn();
-    });
-    QObject::connect(ui.pathtosplintPushButton, &QPushButton::clicked, [&] {
-                app->PthBtn(ui.pathtosplintLineEdit);
-    });
-    QObject::connect(ui.dialogPushButton, &QPushButton::clicked, [&] {
-                app->DialogBtn();
+    QObject::connect(ui.SplintDialogPushButton, &QPushButton::clicked, [&] {
+                app->SplintDialogBtn();
     });
 	QObject::connect(ui.checkPushButton, &QPushButton::clicked, [&] {
                 app->ChckSCABtn();
-    });
-    QObject::connect(ui.choosePushButton, &QPushButton::clicked, [&] {
-                app->ChooseBtn();
     });
 	QObject::connect(proc, &QProcess::readyReadStandardError, [&] {
 				app->updateError(proc);
@@ -76,3 +67,33 @@ int main( int argc, char **argv )
 }
 //-------------------------------------------------------------------------------------------------
 
+int int_opt(int argc, char *argv[]) {
+/*
+	while((opt = getopt(argc, argv, “:if:lrx”)) != -1)  
+    {  
+        switch(opt)  
+        {  
+            case ‘i’:  
+            case ‘l’:  
+            case ‘r’:  
+                printf(“option: %c\n”, opt);  
+                break;  
+            case ‘f’:  
+                printf(“filename: %s\n”, optarg);  
+                break;  
+            case ‘:’:  
+                printf(“option needs a value\n”);  
+                break;  
+            case ‘?’:  
+                printf(“unknown option: %c\n”, optopt); 
+                break;  
+        }  
+    }  
+      
+    // optind is for the extra arguments 
+    // which are not parsed 
+    for(; optind < argc; optind++){      
+        printf(“extra arguments: %s\n”, argv[optind]);  
+    }*/
+return OK;
+}

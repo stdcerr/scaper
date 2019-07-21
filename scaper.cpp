@@ -25,7 +25,7 @@
 
 //-------------------------------------------------------------------------------------------------
 
-void scaper::DialogBtn(void) {
+void scaper::SplintDialogBtn(void) {
     dbg_prnt << "inside " << __func__ <<std::endl;
 	sca_dat splint;
 	splint.parent = ui.centralwidget;
@@ -137,7 +137,7 @@ int scaper::DialogShow(sca_dat &data) {
 	int rv = OK;
 
 	ScaperDialog *inst = new  ScaperDialog(data.parent);
-	inst->fname_set(data.name);
+	inst->fname_set(DFLTPATH);
 	inst->nme_set(data.name);
 	data.dialog = inst;
 	inst->exec();

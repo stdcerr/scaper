@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1089</width>
+    <width>903</width>
     <height>594</height>
    </rect>
   </property>
@@ -160,10 +160,10 @@
         <item row="0" column="0">
          <widget class="QGroupBox" name="SplintOptionsGroupBox">
           <property name="title">
-           <string>Splint options</string>
+           <string>Tool Configuration</string>
           </property>
           <layout class="QGridLayout" name="gridLayout_2">
-           <item row="0" column="1">
+           <item row="0" column="5">
             <widget class="Line" name="line_2">
              <property name="orientation">
               <enum>Qt::Vertical</enum>
@@ -171,348 +171,35 @@
             </widget>
            </item>
            <item row="0" column="3">
-            <widget class="QLabel" name="pathtosplintLabel">
-             <property name="text">
-              <string>Path to splint:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="11" column="8">
-            <widget class="QCheckBox" name="nullretCheckBox">
-             <property name="text">
-              <string>nullret</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="5">
-            <widget class="QPushButton" name="pathtosplintPushButton">
-             <property name="text">
-              <string>Choose...</string>
-             </property>
-            </widget>
-           </item>
-           <item row="13" column="4">
-            <widget class="QCheckBox" name="varuseCheckBox">
-             <property name="text">
-              <string>varuse</string>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="1">
-            <widget class="QCheckBox" name="compdefCheckBox">
-             <property name="text">
-              <string>compdef</string>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="4">
-            <widget class="QCheckBox" name="usedefCheckBox">
-             <property name="text">
-              <string>usedef</string>
-             </property>
-            </widget>
-           </item>
-           <item row="7" column="1">
-            <widget class="QCheckBox" name="matchanyintegralCheckBox">
-             <property name="text">
-              <string>matchanyintegral</string>
-             </property>
-            </widget>
-           </item>
-           <item row="7" column="4">
-            <widget class="QCheckBox" name="imptypeCheckBox">
-             <property name="text">
-              <string>imptype</string>
-             </property>
-            </widget>
-           </item>
-           <item row="11" column="1">
-            <widget class="QCheckBox" name="ptrnegateCheckBox">
-             <property name="text">
-              <string>ptrnegate</string>
-             </property>
-            </widget>
-           </item>
-           <item row="11" column="4">
-            <widget class="QCheckBox" name="bufferoverflowhighCheckBox">
-             <property name="text">
-              <string>bufferoverflowhigh</string>
-             </property>
-            </widget>
-           </item>
-           <item row="7" column="6">
-            <widget class="QCheckBox" name="temptransCheckBox">
-             <property name="text">
-              <string>temptrans</string>
-             </property>
-            </widget>
-           </item>
-           <item row="12" column="0">
-            <widget class="QCheckBox" name="typeCheckBox">
-             <property name="text">
-              <string>type</string>
-             </property>
-            </widget>
-           </item>
-           <item row="12" column="1">
-            <widget class="QCheckBox" name="mayaliasuniqueCheckBox">
-             <property name="text">
-              <string>mayaliasunique</string>
-             </property>
-            </widget>
-           </item>
-           <item row="10" column="6">
-            <widget class="QCheckBox" name="trytorecoverCheckBox">
-             <property name="text">
-              <string>trytorecover</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0" colspan="9">
-            <widget class="Line" name="line">
+            <spacer name="horizontalSpacer_3">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
              </property>
-            </widget>
-           </item>
-           <item row="12" column="4">
-            <widget class="QCheckBox" name="boolopsCheckBox">
-             <property name="text">
-              <string>boolops</string>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
              </property>
-            </widget>
-           </item>
-           <item row="13" column="0">
-            <widget class="QCheckBox" name="nullpassCheckBox">
-             <property name="text">
-              <string>nullpass</string>
-             </property>
-            </widget>
+            </spacer>
            </item>
            <item row="0" column="4">
-            <widget class="QLineEdit" name="pathtosplintLineEdit"/>
-           </item>
-           <item row="13" column="1">
-            <widget class="QCheckBox" name="nullderefCheckBox">
-             <property name="text">
-              <string>nullderef</string>
+            <spacer name="horizontalSpacer_2">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
              </property>
-            </widget>
-           </item>
-           <item row="7" column="5">
-            <widget class="QCheckBox" name="compdestroyCheckBox">
-             <property name="text">
-              <string>compdestroy</string>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
              </property>
-            </widget>
+            </spacer>
            </item>
-           <item row="5" column="5">
-            <widget class="QCheckBox" name="globstateCheckBox">
-             <property name="text">
-              <string>globstate</string>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="7">
-            <widget class="QCheckBox" name="formattypeCheckBox">
-             <property name="text">
-              <string>formattype</string>
-             </property>
-            </widget>
-           </item>
-           <item row="7" column="7">
-            <widget class="QCheckBox" name="onlytransCheckBox">
-             <property name="text">
-              <string>onlytrans</string>
-             </property>
-            </widget>
-           </item>
-           <item row="11" column="7">
-            <widget class="QCheckBox" name="globsCheckBox">
-             <property name="text">
-              <string>globs</string>
-             </property>
-            </widget>
-           </item>
-           <item row="13" column="7">
-            <widget class="QCheckBox" name="exportlocalCheckBox">
-             <property name="text">
-              <string>exportlocal</string>
-             </property>
-            </widget>
-           </item>
-           <item row="7" column="0">
-            <widget class="QCheckBox" name="posixlibCheckBox">
-             <property name="text">
-              <string>posixlib</string>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="0">
-            <widget class="QCheckBox" name="unixlibCheckBox">
-             <property name="text">
-              <string>unixlib</string>
-             </property>
-            </widget>
-           </item>
-           <item row="11" column="0">
-            <widget class="QCheckBox" name="warnposixCheckBox">
-             <property name="text">
-              <string>warnposix</string>
-             </property>
-            </widget>
-           </item>
-           <item row="10" column="0">
-            <widget class="QCheckBox" name="posixstrictlibCheckBox">
-             <property name="text">
-              <string>posixstrictlib</string>
-             </property>
-            </widget>
-           </item>
-           <item row="10" column="1">
-            <widget class="QCheckBox" name="preprocCheckBox">
-             <property name="text">
-              <string>preproc</string>
-             </property>
-            </widget>
-           </item>
-           <item row="10" column="7">
-            <widget class="QCheckBox" name="mustfreefreshCheckBox">
-             <property name="text">
-              <string>mustfreefresh</string>
-             </property>
-            </widget>
-           </item>
-           <item row="10" column="8">
-            <widget class="QCheckBox" name="branchstateCheckBox">
-             <property name="text">
-              <string>branchstate</string>
-             </property>
-            </widget>
-           </item>
-           <item row="10" column="4">
-            <widget class="QCheckBox" name="unrecogCheckBox">
-             <property name="text">
-              <string>unrecog</string>
-             </property>
-            </widget>
-           </item>
-           <item row="13" column="8">
-            <widget class="QCheckBox" name="retvalotherCheckBox">
-             <property name="text">
-              <string>retvalother</string>
-             </property>
-            </widget>
-           </item>
-           <item row="12" column="8">
-            <widget class="QCheckBox" name="retvalintCheckBox">
-             <property name="text">
-              <string>retvalint</string>
-             </property>
-            </widget>
-           </item>
-           <item row="12" column="7">
-            <widget class="QCheckBox" name="predboolothersCheckBox">
-             <property name="text">
-              <string>predboolothers</string>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="8">
-            <widget class="QCheckBox" name="namechecksCheckBox">
-             <property name="text">
-              <string>namechecks</string>
-             </property>
-            </widget>
-           </item>
-           <item row="7" column="8">
-            <widget class="QCheckBox" name="isoreservedCheckBox">
-             <property name="text">
-              <string>isoreserved</string>
-             </property>
-            </widget>
-           </item>
-           <item row="14" column="0">
-            <widget class="QCheckBox" name="isolibCheckBox">
-             <property name="text">
-              <string>isolib</string>
-             </property>
-            </widget>
-           </item>
-           <item row="14" column="1">
-            <widget class="QCheckBox" name="exportfcnCheckBox">
-             <property name="text">
-              <string>exportfcn</string>
-             </property>
-            </widget>
-           </item>
-           <item row="14" column="4">
-            <widget class="QCheckBox" name="gnuextensionsCheckBox">
-             <property name="text">
-              <string>gnuextensions</string>
-             </property>
-            </widget>
-           </item>
-           <item row="14" column="8">
-            <widget class="QCheckBox" name="exportheaderCheckBox">
-             <property name="text">
-              <string>exportheader</string>
-             </property>
-            </widget>
-           </item>
-           <item row="14" column="7">
-            <widget class="QCheckBox" name="paramuseCheckBox">
-             <property name="text">
-              <string>paramuse</string>
-             </property>
-            </widget>
-           </item>
-           <item row="5" column="6">
-            <widget class="QCheckBox" name="declundefCheckBox">
-             <property name="text">
-              <string>declundef</string>
-             </property>
-            </widget>
-           </item>
-           <item row="11" column="6">
-            <widget class="QCheckBox" name="nullassignCheckBox">
-             <property name="text">
-              <string>nullassign</string>
-             </property>
-            </widget>
-           </item>
-           <item row="12" column="6">
-            <widget class="QCheckBox" name="formatconstCheckBox">
-             <property name="text">
-              <string>formatconst</string>
-             </property>
-            </widget>
-           </item>
-           <item row="14" column="6">
-            <widget class="QCheckBox" name="noeffectCheckBox">
-             <property name="text">
-              <string>noeffect</string>
-             </property>
-            </widget>
-           </item>
-           <item row="13" column="6">
-            <widget class="QCheckBox" name="readonlytransCheckBox">
-             <property name="text">
-              <string>readonlytrans</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="8">
-            <widget class="QPushButton" name="uncheckallPushButton">
-             <property name="text">
-              <string>Uncheck All</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="7">
-            <widget class="QPushButton" name="checkallPushButton">
-             <property name="text">
-              <string>Check All</string>
+           <item row="4" column="0" colspan="8">
+            <widget class="Line" name="line">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
              </property>
             </widget>
            </item>
@@ -529,10 +216,71 @@
              </property>
             </spacer>
            </item>
-           <item row="0" column="2">
-            <widget class="QPushButton" name="dialogPushButton">
+           <item row="2" column="0">
+            <widget class="QPushButton" name="pushButton">
              <property name="text">
-              <string>Test Dialog</string>
+              <string>Clang ...</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QPushButton" name="SplintDialogPushButton">
+             <property name="text">
+              <string>Splint ...</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="2">
+            <spacer name="horizontalSpacer_4">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="0" column="1">
+            <spacer name="horizontalSpacer_5">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="3" column="0">
+            <widget class="QPushButton" name="pushButton_2">
+             <property name="text">
+              <string>PushButton</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QCheckBox" name="checkBox">
+             <property name="text">
+              <string>Enable</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QCheckBox" name="checkBox_2">
+             <property name="text">
+              <string>Enable</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QCheckBox" name="checkBox_3">
+             <property name="text">
+              <string>Enable</string>
              </property>
             </widget>
            </item>
@@ -551,7 +299,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1089</width>
+     <width>903</width>
      <height>24</height>
     </rect>
    </property>
@@ -588,22 +336,5 @@
   </action>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>checkallPushButton</sender>
-   <signal>clicked()</signal>
-   <receiver>SplintOptionsGroupBox</receiver>
-   <slot>setFocus()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>890</x>
-     <y>98</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>798</x>
-     <y>90</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>
