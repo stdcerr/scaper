@@ -13,7 +13,7 @@ set(CMAKE_AUTOMOC ON)
 find_package(Qt5 COMPONENTS Widgets REQUIRED)
 #copy the resource file that specifies the splint options
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/SCAPER.conf
-     DESTINATION $ENV{HOME}/.config/GNU/scaper/)
+     DESTINATION $ENV{HOME}/.config/GNU/)
 
 # Populate a CMake variable with the sources
 set(SRCS
