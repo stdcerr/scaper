@@ -19,6 +19,9 @@
 ** Scaper - static code analysis multi Eggler Ron
 **
 ****************************************************************/
+#include <stdio.h>     
+#include <stdlib.h>    
+#include <getopt.h>    
 #include <QObject>
 #include <qapplication.h>
 #include <QtWidgets/QPushButton>
@@ -68,32 +71,6 @@ int main( int argc, char **argv )
 //-------------------------------------------------------------------------------------------------
 
 int int_opt(int argc, char *argv[]) {
-/*
-	while((opt = getopt(argc, argv, “:if:lrx”)) != -1)  
-    {  
-        switch(opt)  
-        {  
-            case ‘i’:  
-            case ‘l’:  
-            case ‘r’:  
-                printf(“option: %c\n”, opt);  
-                break;  
-            case ‘f’:  
-                printf(“filename: %s\n”, optarg);  
-                break;  
-            case ‘:’:  
-                printf(“option needs a value\n”);  
-                break;  
-            case ‘?’:  
-                printf(“unknown option: %c\n”, optopt); 
-                break;  
-        }  
-    }  
-      
-    // optind is for the extra arguments 
-    // which are not parsed 
-    for(; optind < argc; optind++){      
-        printf(“extra arguments: %s\n”, argv[optind]);  
-    }*/
+
 return OK;
 }

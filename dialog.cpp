@@ -86,6 +86,16 @@ rv = QObject::connect(this->uncheckallBtn, &QPushButton::clicked, [&] { this->Un
 
 void ScaperDialog::CheckAll(void) {
     dbg_prnt << "inside " << __func__ <<std::endl;
+	QListWidget *list = parentWidget()->findChild<QListWidget *>();
+	if (!list)
+		std::cerr << "No QListWidget found" << std::endl;
+	
+	for (int i = 0;i != list->count(); i++) {
+	QListWidgetItem *it = list->item(i);
+		dbg_prnt << "test" <<std::endl;
+		dbg_prnt << it->text().toStdString() << std::endl;
+		it->setCheckState(Qt::Checked);
+	}
 }
 //-------------------------------------------------------------------------------------------------
 
