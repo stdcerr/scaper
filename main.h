@@ -34,7 +34,7 @@
     QMainWindow *widget;
     scaper *app;
     Ui::MainWindow ui;
-	int int_opt(int argc, char *argv[]);
+	int int_opt (int argc, char **argv, int *no_gui);
 
 	//void setupslots(scaper&, Ui::Mainwindow&);
 
