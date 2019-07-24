@@ -52,10 +52,10 @@ rv = QObject::connect(this->uncheckallBtn, &QPushButton::clicked, [&] { this->Un
 
 //--------------------------------------------------------------------------------------------------------
 
-	QSettings *sttngs = new QSettings(QSettings::NativeFormat,QSettings::UserScope,"GNU","SCAPER",nullptr);
-	nme_set(sttngs->value("name").toString());
+	QSettings *sttngs = new QSettings(QSettings::NativeFormat,QSettings::UserScope,"GNU","scaper",nullptr);
+	//nme_set(sttngs->value("name").toString());
 	fname_set(sttngs->value("path").toString());
-	sttngs->beginGroup("tooloptions");
+	//sttngs->beginGroup("tooloptions");
 		
 	list = new QListWidget(this);
 	foreach(const QString &key, sttngs->childKeys()) {
@@ -105,14 +105,13 @@ void ScaperDialog::UncheckAll(void) {
 //-------------------------------------------------------------------------------------------------
 
 void ScaperDialog::CloseDialog(void) {
-	QSettings *sttngs = new QSettings(QSettings::NativeFormat,QSettings::UserScope,"GNU","SCAPER",nullptr);
-	sttngs->beginGroup("global");
-	sttngs->setValue("name",nme_get());
+	QSettings *sttngs = new QSettings(QSettings::NativeFormat,QSettings::UserScope,"GNU","scaper",nullptr);
+	sttngs->beginGroup(nme_get());
+	//sttngs->setValue("name",nme_get());
 	sttngs->setValue("path",fname_get());
-	dbg_prnt << "fname: " << fname_get().toStdString() <<std::endl;
 	sttngs->setValue("size", this->size());
-	sttngs->endGroup();
-	sttngs->beginGroup("tooloptions");
+	//sttngs->endGroup();
+	//sttngs->beginGroup(nme_get());
 
 	for (int i =0; i< list->count(); i++) {
 		QListWidgetItem* row = list->item(i);

@@ -24,6 +24,12 @@
 
 
 //-------------------------------------------------------------------------------------------------
+scaper::scaper() {
+	pname_set(PROGRAM_NAME);
+	QSettings *sttngs = new QSettings(QSettings::NativeFormat,QSettings::UserScope,CORP_NAME,pname_get(),nullptr);
+
+}
+//-------------------------------------------------------------------------------------------------
 
 void scaper::SplintDialogBtn(void) {
     dbg_prnt << "inside " << __func__ <<std::endl;

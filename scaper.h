@@ -34,8 +34,10 @@
 #define OK      0
 #define ERROR   -1
 
-#define DFLTPATH	"/usr/bin/splint"
-#define LoadDefaults(a,u) (a)->fname_set(DFLTPATH);
+#define DFLTPATH		"/usr/bin/splint"
+#define CORP_NAME		"GNU"
+#define PROGRAM_NAME	"SCAPER"
+#define LoadDefaults(a) (a)->fname_set(DFLTPATH);
 class ScaperDialog;		// foward declaration
 
 
@@ -50,6 +52,7 @@ class scaper {
         int runsca(QString&);
 		int CheckFilePath(QString path);
 		int CobfigGet(QStringList *con);
+		QString pname;
         QString fname;
         QStringList slst;
 		QStringList conf;
@@ -61,12 +64,15 @@ class scaper {
 			};
 	 	int DialogShow(sca_dat&);
     public:
+        void pname_set(const QString &s) { pname = s; }
+        QString pname_get(void) const { return pname; }
         void fname_set(const QString &s) { fname = s; }
         QString fname_get(void) const { return fname; }
         void srcs_set(const QStringList &l) { slst = l; }
         QStringList srcs_get(void) const { return slst; }
 		void conf_set(const QStringList &c) {conf = c; }
 		QStringList conf_get(void) const { return conf; }
+		scaper();
         ~scaper(){}
         Ui::MainWindow ui;
 		QProcess *proc;

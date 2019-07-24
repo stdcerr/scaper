@@ -39,15 +39,14 @@ int main( int argc, char **argv )
     scaper *app = new scaper;
     Ui::MainWindow ui;
 	int no_gui = 0;
-
+	app->pname_set(argv[0]);
 	int_opt(argc, argv, &no_gui);
-	std::cerr << "no_gui " << no_gui <<std::endl;
 
-    ui.setupUi(widget);
-	LoadDefaults(app,ui);
+	LoadDefaults(app);
+    if (!no_gui) {
+	ui.setupUi(widget);
 	app->proc = proc;
     app->ui = ui;
-    bool rv = OK;
     QObject::connect(ui.SplintDialogPushButton, &QPushButton::clicked, [&] {
                 app->SplintDialogBtn();
     });
@@ -57,15 +56,15 @@ int main( int argc, char **argv )
 	QObject::connect(proc, &QProcess::readyReadStandardError, [&] {
 				app->updateError(proc);
 	});
-	rv = QObject::connect(proc, &QProcess::readyReadStandardOutput, [&] {
+	QObject::connect(proc, &QProcess::readyReadStandardOutput, [&] {
 				app->updateText(proc);
 	});
-    if (!rv) {
-        std::cerr << "connect() failed: rv:" << rv << std::endl;
-    }
 
     widget->show();
     return a.exec();
+	} else {
+		std::cout << "--no-gui option supplied" <<std::endl;
+	}
 
         
     return OK;
@@ -85,7 +84,7 @@ int int_opt (int argc, char **argv, int *no_gui) {
         {"create", 1, 0, 'c'},
         {"file", 1, 0, 0},
         {"debug",0, 0, 'd'},
-        {"no-gui",0, no_gui, 0},
+        {"no-gui",0, no_gui, 1},
         {NULL, 0, NULL, 0}
     };
     int option_index = 0;
