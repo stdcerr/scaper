@@ -53,9 +53,9 @@ rv = QObject::connect(this->uncheckallBtn, &QPushButton::clicked, [&] { this->Un
 //--------------------------------------------------------------------------------------------------------
 
 	QSettings *sttngs = new QSettings(QSettings::NativeFormat,QSettings::UserScope,"GNU","scaper",nullptr);
-	//nme_set(sttngs->value("name").toString());
+	dbg_prnt << "nme_get(): " << nme_get().toStdString() << std::endl;
+	sttngs->beginGroup("Splint");
 	fname_set(sttngs->value("path").toString());
-	//sttngs->beginGroup("tooloptions");
 		
 	list = new QListWidget(this);
 	foreach(const QString &key, sttngs->childKeys()) {
@@ -92,8 +92,7 @@ void ScaperDialog::CheckAll(void) {
 	
 	for (int i = 0;i != list->count(); i++) {
 	QListWidgetItem *it = list->item(i);
-		dbg_prnt << "test" <<std::endl;
-		dbg_prnt << it->text().toStdString() << std::endl;
+		//dbg_prnt << it->text().toStdString() << std::endl;
 		it->setCheckState(Qt::Checked);
 	}
 }
@@ -101,6 +100,10 @@ void ScaperDialog::CheckAll(void) {
 
 void ScaperDialog::UncheckAll(void) {
     dbg_prnt << "inside " << __func__ <<std::endl;
+	QListWidget *list = parentWidget()->findChild<QListWidget *>();
+	if (!list)
+		std::cerr << "No QListWidget found" << std::endl;
+
 }
 //-------------------------------------------------------------------------------------------------
 
