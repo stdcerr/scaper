@@ -67,7 +67,7 @@
         <string>Options</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_5">
-        <item row="1" column="0">
+        <item row="1" column="1">
          <widget class="QGroupBox" name="groupBox">
           <property name="title">
            <string>Check mode</string>
@@ -107,7 +107,7 @@
           </layout>
          </widget>
         </item>
-        <item row="2" column="0">
+        <item row="2" column="1">
          <widget class="QGroupBox" name="groupBox_2">
           <property name="title">
            <string>Compiler options</string>
@@ -144,7 +144,7 @@
           </layout>
          </widget>
         </item>
-        <item row="3" column="0">
+        <item row="3" column="1">
          <spacer name="verticalSpacer">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
@@ -157,13 +157,13 @@
           </property>
          </spacer>
         </item>
-        <item row="0" column="0">
+        <item row="0" column="1">
          <widget class="QGroupBox" name="SplintOptionsGroupBox">
           <property name="title">
            <string>Tool Configuration</string>
           </property>
           <layout class="QGridLayout" name="gridLayout_2">
-           <item row="0" column="5">
+           <item row="0" column="4">
             <widget class="Line" name="line_2">
              <property name="orientation">
               <enum>Qt::Vertical</enum>
@@ -183,27 +183,14 @@
              </property>
             </spacer>
            </item>
-           <item row="0" column="4">
-            <spacer name="horizontalSpacer_2">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="4" column="0" colspan="8">
+           <item row="4" column="1" colspan="6">
             <widget class="Line" name="line">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
              </property>
             </widget>
            </item>
-           <item row="0" column="0">
+           <item row="0" column="1">
             <spacer name="horizontalSpacer">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
@@ -216,14 +203,14 @@
              </property>
             </spacer>
            </item>
-           <item row="2" column="0">
+           <item row="2" column="1">
             <widget class="QPushButton" name="pushButton">
              <property name="text">
               <string>Clang ...</string>
              </property>
             </widget>
            </item>
-           <item row="1" column="0">
+           <item row="1" column="1">
             <widget class="QPushButton" name="SplintDialogPushButton">
              <property name="text">
               <string>Splint ...</string>
@@ -231,19 +218,6 @@
             </widget>
            </item>
            <item row="0" column="2">
-            <spacer name="horizontalSpacer_4">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="0" column="1">
             <spacer name="horizontalSpacer_5">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
@@ -256,35 +230,42 @@
              </property>
             </spacer>
            </item>
-           <item row="3" column="0">
+           <item row="3" column="1">
             <widget class="QPushButton" name="pushButton_2">
              <property name="text">
               <string>PushButton</string>
              </property>
             </widget>
            </item>
-           <item row="1" column="1">
-            <widget class="QCheckBox" name="checkBox">
-             <property name="text">
-              <string>Enable</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="1">
-            <widget class="QCheckBox" name="checkBox_2">
-             <property name="text">
-              <string>Enable</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="1">
+           <item row="3" column="2">
             <widget class="QCheckBox" name="checkBox_3">
              <property name="text">
               <string>Enable</string>
              </property>
             </widget>
            </item>
+           <item row="2" column="2">
+            <widget class="QCheckBox" name="checkBox_2">
+             <property name="text">
+              <string>Enable</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <widget class="QCheckBox" name="checkBox">
+             <property name="text">
+              <string>Enable</string>
+             </property>
+            </widget>
+           </item>
           </layout>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QGroupBox" name="ConfigGroupBox">
+          <property name="title">
+           <string>GroupBox</string>
+          </property>
          </widget>
         </item>
        </layout>
@@ -300,7 +281,7 @@
      <x>0</x>
      <y>0</y>
      <width>903</width>
-     <height>24</height>
+     <height>15</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuSplint_GUI">

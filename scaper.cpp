@@ -24,10 +24,22 @@
 
 
 //-------------------------------------------------------------------------------------------------
-scaper::scaper() {
-	pname_set(PROGRAM_NAME);
-	QSettings *sttngs = new QSettings(QSettings::NativeFormat,QSettings::UserScope,CORP_NAME,pname_get(),nullptr);
-
+scaper::scaper(QWidget *parent) {
+	QGroupBox *grpbox = parent->findChild<QGroupBox *>("ConfigGroupBox");
+	if (grpbox)
+		dbg_prnt << "GroupBox found! "<< grpbox->objectName().toStdString() << std::endl;
+	QHBoxLayout *hbox = new QHBoxLayout;
+	QSettings *sttngs = new QSettings(QSettings::NativeFormat,QSettings::UserScope,"GNU","scaper",nullptr);
+	QStringList groups = sttngs->childGroups();
+	foreach (const QString grp, groups) {
+		dbg_prnt << "Group: " << grp.toStdString() << std::endl;
+		hbox->addWidget( DialogBtnCreate(grp) );
+	}
+	grpbox->setLayout(hbox);
+}
+//-------------------------------------------------------------------------------------------------
+QPushButton* scaper::DialogBtnCreate(QString nme) {
+ return new QPushButton(nme);
 }
 //-------------------------------------------------------------------------------------------------
 

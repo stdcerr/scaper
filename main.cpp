@@ -36,15 +36,15 @@ int main( int argc, char **argv )
     QApplication a( argc, argv );
 	QProcess *proc = new QProcess;
     QMainWindow *widget = new QMainWindow;
-    scaper *app = new scaper;
     Ui::MainWindow ui;
 	int no_gui = 0;
-	app->pname_set(argv[0]);
 	int_opt(argc, argv, &no_gui);
 
-	LoadDefaults(app);
     if (!no_gui) {
 	ui.setupUi(widget);
+	scaper *app = new scaper(widget);
+	app->pname_set(argv[0]);
+	LoadDefaults(app);
 	app->proc = proc;
     app->ui = ui;
     QObject::connect(ui.SplintDialogPushButton, &QPushButton::clicked, [&] {

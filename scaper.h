@@ -41,12 +41,13 @@
 class ScaperDialog;		// foward declaration
 
 
-class scaper {
+class scaper :QMainWindow{
     private:
         int checkall(QObject*);
         int uncheckall(QObject*);
         int dialogShow(QWidget*);
         int check(QWidget*);
+	QPushButton* DialogBtnCreate(QString nme);
 		int choose (QWidget*);
 		int asm_cmd(QString &cmd);
         int runsca(QString&);
@@ -64,6 +65,8 @@ class scaper {
 			};
 	 	int DialogShow(sca_dat&);
     public:
+	scaper(QWidget *parent);
+        ~scaper(){}
         void pname_set(const QString &s) { pname = s; }
         QString pname_get(void) const { return pname; }
         void fname_set(const QString &s) { fname = s; }
@@ -72,8 +75,6 @@ class scaper {
         QStringList srcs_get(void) const { return slst; }
 		void conf_set(const QStringList &c) {conf = c; }
 		QStringList conf_get(void) const { return conf; }
-		scaper();
-        ~scaper(){}
         Ui::MainWindow ui;
 		QProcess *proc;
     public slots:

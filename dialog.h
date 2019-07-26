@@ -45,13 +45,13 @@ class ScaperDialog: public QDialog
 		void ChooseBin(void);
 
     private:
-		QString SCAnme;
-		QString fname;
-		QVBoxLayout *layout;
-		QLabel *mlab;
-		QLabel *blab;
+	QString SCAnme;
+	QString fname;
+	QVBoxLayout *layout;
+	QLabel *mlab;
+	QLabel *blab;
 
-		QLineEdit *binpth;
+	QLineEdit *binpth;
         QListWidget *list;
         QListWidgetItem *item;
         //QCheckBox *chkall;
@@ -60,8 +60,8 @@ class ScaperDialog: public QDialog
         QPushButton *chooseBtn;
         QPushButton *checkallBtn;
         QPushButton *uncheckallBtn;
-		QHBoxLayout *hbox;
-		QHBoxLayout *chckbox;
+	QHBoxLayout *hbox;
+	QHBoxLayout *chckbox;
 
 		void TextSet(QString);
         
