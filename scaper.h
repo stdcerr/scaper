@@ -47,7 +47,8 @@ class scaper :QMainWindow{
         int uncheckall(QObject*);
         int dialogShow(QWidget*);
         int check(QWidget*);
-	QPushButton* DialogBtnCreate(QString nme);
+	QPushButton* DlgShwBtnCrt(QString nme);
+	QCheckBox* DlgEnChckBxCrt(QString txt,Qt::CheckState chckd);
 		int choose (QWidget*);
 		int asm_cmd(QString &cmd);
         int runsca(QString&);
@@ -64,6 +65,15 @@ class scaper :QMainWindow{
 			QString fname;
 			};
 	 	int DialogShow(sca_dat&);
+		QCheckBox *box;
+		QString grp;
+		const QSettings *sttngs;
+		void grp_set(const QString &str) {grp=str;}
+		void sttngs_set(const QSettings* &ptr) {sttngs = ptr;}
+		QString grp_get(void) const {return grp;}
+		const QSettings* sttngs_get(void) {return sttngs;}
+    private slots:
+    		void DlgEnChckSv(void);
     public:
 	scaper(QWidget *parent);
         ~scaper(){}

@@ -26,20 +26,38 @@
 //-------------------------------------------------------------------------------------------------
 scaper::scaper(QWidget *parent) {
 	QGroupBox *grpbox = parent->findChild<QGroupBox *>("ConfigGroupBox");
-	if (grpbox)
-		dbg_prnt << "GroupBox found! "<< grpbox->objectName().toStdString() << std::endl;
-	QHBoxLayout *hbox = new QHBoxLayout;
+	QVBoxLayout *vbox = new QVBoxLayout;
 	QSettings *sttngs = new QSettings(QSettings::NativeFormat,QSettings::UserScope,"GNU","scaper",nullptr);
 	QStringList groups = sttngs->childGroups();
+	sttngs->beginGroup("scaper");
 	foreach (const QString grp, groups) {
-		dbg_prnt << "Group: " << grp.toStdString() << std::endl;
-		hbox->addWidget( DialogBtnCreate(grp) );
+		QHBoxLayout *hbox = new QHBoxLayout;
+		vbox->addWidget( DlgShwBtnCrt(grp) );
+		box = DlgEnChckBxCrt("Enable", (Qt::CheckState)sttngs->value(grp+"/Enable").toInt());
+		this->sttngs_set(&sttngs);
+		this->grp_set(grp);
+		QObject::connect(this->box, &QCheckBox::clicked, [&] { this->DlgEnChckSv(); });
+		//grpbox->setLayout(hbox);
+		vbox->addWidget(box);
 	}
-	grpbox->setLayout(hbox);
+	grpbox->setLayout(vbox);
 }
 //-------------------------------------------------------------------------------------------------
-QPushButton* scaper::DialogBtnCreate(QString nme) {
- return new QPushButton(nme);
+void scaper::DlgEnChckSv(void) {
+    dbg_prnt << "inside " << __func__ <<std::endl;
+    const QSettings *sttngs = sttngs_get();
+    QString grp = grp_get();
+
+}
+//-------------------------------------------------------------------------------------------------
+QPushButton* scaper::DlgShwBtnCrt(QString nme) {
+	return new QPushButton(nme);
+}
+//-------------------------------------------------------------------------------------------------
+QCheckBox* scaper::DlgEnChckBxCrt(QString txt,Qt::CheckState chckd) {
+	QCheckBox *box = new QCheckBox(txt);
+	box->setCheckState(chckd);
+	return box;
 }
 //-------------------------------------------------------------------------------------------------
 
