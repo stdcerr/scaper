@@ -34,7 +34,7 @@ scaper::scaper(QWidget *parent) {
 		QHBoxLayout *hbox = new QHBoxLayout;
 		vbox->addWidget( DlgShwBtnCrt(grp) );
 		box = DlgEnChckBxCrt("Enable", (Qt::CheckState)sttngs->value(grp+"/Enable").toInt());
-		this->sttngs_set(&sttngs);
+		this->sttngs_set(sttngs);
 		this->grp_set(grp);
 		QObject::connect(this->box, &QCheckBox::clicked, [&] { this->DlgEnChckSv(); });
 		//grpbox->setLayout(hbox);

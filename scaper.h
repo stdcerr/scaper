@@ -69,7 +69,7 @@ class scaper :QMainWindow{
 		QString grp;
 		const QSettings *sttngs;
 		void grp_set(const QString &str) {grp=str;}
-		void sttngs_set(const QSettings* &ptr) {sttngs = ptr;}
+		void sttngs_set(const QSettings* ptr) {sttngs = ptr;}
 		QString grp_get(void) const {return grp;}
 		const QSettings* sttngs_get(void) {return sttngs;}
     private slots:
