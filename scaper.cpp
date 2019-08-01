@@ -36,15 +36,19 @@ scaper::scaper(QWidget *parent) {
 		box = DlgEnChckBxCrt("Enable", (Qt::CheckState)sttngs->value(grp+"/Enable").toInt());
 		this->sttngs_set(sttngs);
 		this->grp_set(grp);
-		QObject::connect(this->box, &QCheckBox::clicked, [&] { this->DlgEnChckSv(); });
-		//grpbox->setLayout(hbox);
+		bool rv = QObject::connect(this->box, &QCheckBox::clicked, [&] { this->DlgEnChckSv(); });
+		if (!rv)
+			std::cout << "connect for button " << grp.toStdString() << " failed" << std::endl;
 		vbox->addWidget(box);
 	}
 	grpbox->setLayout(vbox);
 }
 //-------------------------------------------------------------------------------------------------
 void scaper::DlgEnChckSv(void) {
-    dbg_prnt << "inside " << __func__ <<std::endl;
+    QObject *obj = sender();
+    QCheckBox *src = qobject_cast<QCheckBox*>(sender());
+    if (!src)
+        dbg_prnt << "inside " << __func__ << " for " << src->text().toStdString() << std::endl;
     const QSettings *sttngs = sttngs_get();
     QString grp = grp_get();
 
