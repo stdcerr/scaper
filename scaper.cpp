@@ -45,13 +45,12 @@ scaper::scaper(QWidget *parent) {
 }
 //-------------------------------------------------------------------------------------------------
 void scaper::DlgEnChckSv(void) {
-    QObject *obj = sender();
     QCheckBox *src = qobject_cast<QCheckBox*>(sender());
-    if (!src)
+    if (src)
         dbg_prnt << "inside " << __func__ << " for " << src->text().toStdString() << std::endl;
+    else 
+	dbg_prnt << "no object found" << std::endl;
     const QSettings *sttngs = sttngs_get();
-    QString grp = grp_get();
-
 }
 //-------------------------------------------------------------------------------------------------
 QPushButton* scaper::DlgShwBtnCrt(QString nme) {
