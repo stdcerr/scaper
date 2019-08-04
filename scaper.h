@@ -65,7 +65,7 @@ class scaper :QMainWindow{
 			QString fname;
 			};
 	 	int DialogShow(sca_dat&);
-		QCheckBox *box;
+		QCheckBox *chkbox;
 		QString grp;
 		const QSettings *sttngs;
 		void grp_set(const QString &str) {grp=str;}
@@ -73,7 +73,7 @@ class scaper :QMainWindow{
 		QString grp_get(void) const {return grp;}
 		const QSettings* sttngs_get(void) {return sttngs;}
     private slots:
-    		void DlgEnChckSv(void);
+    		void DlgEnChckSv(QString &group);
     public:
 	scaper(QWidget *parent);
         ~scaper(){}

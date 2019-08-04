@@ -28,28 +28,29 @@ scaper::scaper(QWidget *parent) {
 	QGroupBox *grpbox = parent->findChild<QGroupBox *>("ConfigGroupBox");
 	QVBoxLayout *vbox = new QVBoxLayout;
 	QSettings *sttngs = new QSettings(QSettings::NativeFormat,QSettings::UserScope,"GNU","scaper",nullptr);
+	QCheckBox *tmpbox = nullptr;
+	QString str = "";
 	QStringList groups = sttngs->childGroups();
 	sttngs->beginGroup("scaper");
 	foreach (const QString grp, groups) {
 		QHBoxLayout *hbox = new QHBoxLayout;
 		vbox->addWidget( DlgShwBtnCrt(grp) );
-		box = DlgEnChckBxCrt("Enable", (Qt::CheckState)sttngs->value(grp+"/Enable").toInt());
+		dbg_prnt << "grp " <<grp.toStdString() << std::endl;
+		chkbox = DlgEnChckBxCrt("Enable", (Qt::CheckState)sttngs->value(grp+"/Enable").toInt());
+		tmpbox = chkbox;
+		str = grp;
 		this->sttngs_set(sttngs);
 		this->grp_set(grp);
-		bool rv = QObject::connect(this->box, &QCheckBox::clicked, [&] { this->DlgEnChckSv(); });
+		vbox->addWidget(chkbox);
+		bool rv = QObject::connect(this->chkbox, &QCheckBox::clicked, [tmpbox, this] { this->DlgEnChckSv(this->grp);dbg_prnt << "senderObject: " <<  std::endl; });
 		if (!rv)
 			std::cout << "connect for button " << grp.toStdString() << " failed" << std::endl;
-		vbox->addWidget(box);
 	}
 	grpbox->setLayout(vbox);
 }
 //-------------------------------------------------------------------------------------------------
-void scaper::DlgEnChckSv(void) {
-    QCheckBox *src = qobject_cast<QCheckBox*>(sender());
-    if (src)
-        dbg_prnt << "inside " << __func__ << " for " << src->text().toStdString() << std::endl;
-    else 
-	dbg_prnt << "no object found" << std::endl;
+void scaper::DlgEnChckSv(QString &nme) {
+	dbg_prnt << "inside " << __func__ << " for " << nme.toStdString() << std::endl;
     const QSettings *sttngs = sttngs_get();
 }
 //-------------------------------------------------------------------------------------------------
