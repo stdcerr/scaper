@@ -21,11 +21,13 @@
 #include <unistd.h>
 #include "ui_scaper.h"
 #include "scaper.h"
+#include "scacfg.h"
 
 
 //-------------------------------------------------------------------------------------------------
 scaper::scaper(QWidget *parent) {
 	QGroupBox *grpbox = parent->findChild<QGroupBox *>("ConfigGroupBox");
+	scacfg *config = new scacfg("test",parent);
 	QVBoxLayout *vbox = new QVBoxLayout;
 	QSettings *sttngs = new QSettings(QSettings::NativeFormat,QSettings::UserScope,"GNU","scaper",nullptr);
 	QCheckBox *tmpbox = nullptr;
@@ -38,11 +40,10 @@ scaper::scaper(QWidget *parent) {
 		dbg_prnt << "grp " <<grp.toStdString() << std::endl;
 		chkbox = DlgEnChckBxCrt("Enable", (Qt::CheckState)sttngs->value(grp+"/Enable").toInt());
 		tmpbox = chkbox;
-		str = grp;
 		this->sttngs_set(sttngs);
 		this->grp_set(grp);
 		vbox->addWidget(chkbox);
-		bool rv = QObject::connect(this->chkbox, &QCheckBox::clicked, [tmpbox, this] { this->DlgEnChckSv(this->grp);dbg_prnt << "senderObject: " <<  std::endl; });
+		bool rv = QObject::connect(this->chkbox, &QCheckBox::clicked, [tmpbox, this] { this->DlgEnChckSv(this->grp); });
 		if (!rv)
 			std::cout << "connect for button " << grp.toStdString() << " failed" << std::endl;
 	}
