@@ -18,7 +18,7 @@
 #include "scacfg.h"
 
 
-scacfg::scacfg(const QString &caption = "Click Me", QWidget *parent = nullptr) : QWidget(parent),
+scacfg::scacfg(const QString &caption, QWidget *parent) : QWidget(parent),
            checkBox(new QCheckBox("Enabled")),
            button(new QPushButton(caption))
 {

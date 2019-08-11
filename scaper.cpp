@@ -27,14 +27,14 @@
 //-------------------------------------------------------------------------------------------------
 scaper::scaper(QWidget *parent) {
 	QGroupBox *grpbox = parent->findChild<QGroupBox *>("ConfigGroupBox");
-	scacfg *config = new scacfg("test",parent);
 	QVBoxLayout *vbox = new QVBoxLayout;
 	QSettings *sttngs = new QSettings(QSettings::NativeFormat,QSettings::UserScope,"GNU","scaper",nullptr);
 	QCheckBox *tmpbox = nullptr;
 	QString str = "";
 	QStringList groups = sttngs->childGroups();
 	sttngs->beginGroup("scaper");
-	foreach (const QString grp, groups) {
+	foreach (const QString &grp, groups) {
+		scacfg *config = new scacfg(grp);
 		QHBoxLayout *hbox = new QHBoxLayout;
 		vbox->addWidget( DlgShwBtnCrt(grp) );
 		dbg_prnt << "grp " <<grp.toStdString() << std::endl;

@@ -14,33 +14,29 @@
  * You should have received a copy of the GNU General Public License 
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-#include <QPushButton>
-#include <QCheckBox>
-#include <QWidget>
-#include <QBoxLayout>
-#ifndef __SCACFG_H__
-#define __SCACFG_H__
+#ifndef __MAIN_H__
+#define __MAIN_H__
 
-class scacfg : public QWidget
-{
-    Q_OBJECT
+#include <stdio.h>
+#include <unistd.h>
+#include <QObject>
+#include <qapplication.h>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QMessageBox>
+#include "ui_scaper.h"
+#include "scaper.h"
+#include "dialog.h"
 
-public:
-    scacfg(const QString &caption = "Click Me", QWidget *parent=nullptr);
-    
-    
-    QString caption() const; 
-    void setCaption(const QString &caption);
-    
-    bool isChecked() const;
-    void setChecked(bool ch);
-    
-signals:
-    void checkBoxToggled(bool) const;
-    void buttonClicked() const;
-    
-private:
-    QCheckBox *checkBox;
-    QPushButton *button;    
-};
+
+
+	QString conf_loc;
+	QProcess *proc;
+    QMainWindow *widget;
+    scaper *app;
+    Ui::MainWindow ui;
+	int int_opt (int argc, char **argv, int *no_gui);
+
+	//void setupslots(scaper&, Ui::Mainwindow&);
+
+
 #endif

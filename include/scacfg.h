@@ -16,8 +16,10 @@
  */
 #include <QPushButton>
 #include <QCheckBox>
+#include <QSettings>
 #include <QWidget>
 #include <QBoxLayout>
+#include <dialog.h>
 #ifndef __SCACFG_H__
 #define __SCACFG_H__
 
@@ -26,7 +28,7 @@ class scacfg : public QWidget
     Q_OBJECT
 
 public:
-    scacfg(const QString &caption = "Click Me", QWidget *parent=nullptr);
+    scacfg(const QString &caption = "Click Me", QWidget *parent=nullptr, QSettings *config=nullptr);
     
     
     QString caption() const; 
@@ -42,5 +44,8 @@ signals:
 private:
     QCheckBox *checkBox;
     QPushButton *button;    
+	QSettings *sttngs;
+	void openDialog(QWidget *parent);
+	QString name;
 };
 #endif
