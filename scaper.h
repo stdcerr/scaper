@@ -47,29 +47,24 @@ class scaper :QMainWindow{
         int uncheckall(QObject*);
         int dialogShow(QWidget*);
         int check(QWidget*);
+        int ToolCmdExec();
+        QString CmdStrBuild(QSettings *settings,const QString &grp);
 	QPushButton* DlgShwBtnCrt(QString nme);
 	QCheckBox* DlgEnChckBxCrt(QString txt,Qt::CheckState chckd);
 		int choose (QWidget*);
 		int asm_cmd(QString &cmd);
         int runsca(QString&);
 		int CheckFilePath(QString path);
-		int CobfigGet(QStringList *con);
+		int ConfigGet(QStringList *con);
 		QString pname;
         QString fname;
         QStringList slst;
 		QStringList conf;
-		struct sca_dat {
-			QWidget *parent;
-			ScaperDialog *dialog;
-			QString name;
-			QString fname;
-			};
-	 	int DialogShow(sca_dat&);
 		QCheckBox *chkbox;
 		QString grp;
-		const QSettings *sttngs;
+		QSettings *sttngs;
 		void grp_set(const QString &str) {grp=str;}
-		void sttngs_set(const QSettings* ptr) {sttngs = ptr;}
+		void sttngs_set(QSettings* ptr) {sttngs = ptr;}
 		QString grp_get(void) const {return grp;}
 		const QSettings* sttngs_get(void) {return sttngs;}
     private slots:
@@ -87,6 +82,13 @@ class scaper :QMainWindow{
 		QStringList conf_get(void) const { return conf; }
         Ui::MainWindow ui;
 		QProcess *proc;
+		struct sca_dat {
+			QWidget *parent;
+			ScaperDialog *dialog;
+			QString name;
+			QString fname;
+			};
+	 	int DialogShow(sca_dat&);
     public slots:
         void ChckBtn(void);
         void UnchckBtn(void);

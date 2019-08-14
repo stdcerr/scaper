@@ -20,11 +20,12 @@
 #include "scaper.h"
 
 
-ScaperDialog::ScaperDialog(QWidget *parent) :QDialog(parent) {
+ScaperDialog::ScaperDialog(const QString &name, QWidget *parent) :QDialog(parent) {
 	bool rv;
     int nWidth = 300;
-    int nHeight = 300;
+    int nHeight = 300;    
 	resize(nWidth, nHeight);
+    nme_set(name);
     layout = new QVBoxLayout;
 	mlab = new QLabel;
 	blab = new QLabel;
@@ -50,22 +51,28 @@ rv = QObject::connect(this->uncheckallBtn, &QPushButton::clicked, [&] { this->Un
 	rv = QObject::connect(this->closeBtn, &QPushButton::clicked, [&] { this->CloseDialog();	 });
     if (!rv) {std::cerr << "connect() failed: rv:" << rv << std::endl;}
 
-//--------------------------------------------------------------------------------------------------------
 
 	QSettings *sttngs = new QSettings(QSettings::NativeFormat,QSettings::UserScope,"GNU","scaper",nullptr);
 	dbg_prnt << "nme_get(): " << nme_get().toStdString() << std::endl;
-	sttngs->beginGroup("Splint");
+	sttngs->beginGroup(nme_get());
+    dbg_prnt << "beginGroup [" << nme_get().toStdString() << "]"<<std::endl;
+    QString test = sttngs->value("path").toString();
+    dbg_prnt << "in " << __func__ << " path " << test.toStdString() << std::endl;
 	fname_set(sttngs->value("path").toString());
 		
 	list = new QListWidget(this);
 	foreach(const QString &key, sttngs->childKeys()) {
 		item = new QListWidgetItem(list);
 		item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
+		if(!isValidKey(key)) {
+			continue;
+		}
 		Qt::CheckState state = (Qt::CheckState) sttngs->value(key).toInt();
 		item->setCheckState(state);
 		item->setText(key);
 		list->addItem(item);
 	}
+    sttngs->endGroup();
 	layout->addWidget(mlab);
 	hbox->addWidget(blab);
 	hbox->addWidget(binpth);
@@ -76,9 +83,6 @@ rv = QObject::connect(this->uncheckallBtn, &QPushButton::clicked, [&] { this->Un
 	chckbox->addWidget(uncheckallBtn);
 	layout->addLayout(chckbox);
     layout->addWidget(closeBtn);
-
-
-
 
     this->setLayout(layout);
 }
@@ -108,22 +112,17 @@ void ScaperDialog::UncheckAll(void) {
 //-------------------------------------------------------------------------------------------------
 
 void ScaperDialog::CloseDialog(void) {
-	QSettings *sttngs = new QSettings(QSettings::NativeFormat,QSettings::UserScope,"GNU","scaper",nullptr);
+	QSettings *sttngs = new QSettings(QSettings::NativeFormat,QSettings::UserScope,"GNU",nme_get(),nullptr);
 	sttngs->beginGroup(nme_get());
-	//sttngs->setValue("name",nme_get());
 	sttngs->setValue("path",fname_get());
 	sttngs->setValue("size", this->size());
-	//sttngs->endGroup();
-	//sttngs->beginGroup(nme_get());
 
 	for (int i =0; i< list->count(); i++) {
 		QListWidgetItem* row = list->item(i);
 		sttngs->setValue(row->text(),row->checkState());
 	}
-	
-
-
-	 delete sttngs;
+    sttngs->endGroup();
+	delete sttngs;
 
 	close();
 }
@@ -136,8 +135,22 @@ void ScaperDialog::ChooseBin(void) {
 }
 //-------------------------------------------------------------------------------------------------
 
-void ScaperDialog::TextSet(QString txt) {
+void ScaperDialog::PathSet(QString txt) {
+dbg_prnt << "in " << __func__ << " txt " << txt.toStdString() <<std::endl;
 	binpth->setText(txt);
 }
 //-------------------------------------------------------------------------------------------------
 
+void ScaperDialog::closeEvent(QCloseEvent *event) {
+dbg_prnt << "in " << __func__ << std::endl;
+this->CloseDialog();
+}
+//-------------------------------------------------------------------------------------------------
+
+bool ScaperDialog::isValidKey (const QString &key) {
+
+    if (key.startsWith("scapercfg_"))
+        return false;
+    	
+	return true;
+}

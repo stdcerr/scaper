@@ -31,8 +31,9 @@ class ScaperDialog: public QDialog
 {
     Q_OBJECT
     public:
-        ScaperDialog(QWidget *parent = 0);
-		void fname_set (const QString &s) {fname = s;TextSet(s);}
+        ScaperDialog(const QString &name="", QWidget *parent=0);
+		void fname_set(const QString &s) {fname = s;
+                                          PathSet(s);}
 		QString fname_get(void) const {return fname;}
 		void nme_set(const QString &s) {SCAnme = s;}
 		QString nme_get(void) {return SCAnme;}
@@ -52,18 +53,20 @@ class ScaperDialog: public QDialog
 	QLabel *blab;
 
 	QLineEdit *binpth;
-        QListWidget *list;
-        QListWidgetItem *item;
-        //QCheckBox *chkall;
-        //QCheckBox *unchkall;
-        QPushButton *closeBtn;
-        QPushButton *chooseBtn;
-        QPushButton *checkallBtn;
-        QPushButton *uncheckallBtn;
+    QListWidget *list;
+    QListWidgetItem *item;
+    //QCheckBox *chkall;
+    //QCheckBox *unchkall;
+    QPushButton *closeBtn;
+    QPushButton *chooseBtn;
+    QPushButton *checkallBtn;
+    QPushButton *uncheckallBtn;
 	QHBoxLayout *hbox;
 	QHBoxLayout *chckbox;
 
-		void TextSet(QString);
+    void PathSet(QString);
+    void closeEvent(QCloseEvent *event);
+	bool isValidKey (const QString &key);
         
 };
 

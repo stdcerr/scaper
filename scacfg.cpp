@@ -16,18 +16,29 @@
  */
 
 #include "scacfg.h"
+#include "scaper.h"
 
+static void chckbxtggl();
 
-scacfg::scacfg(const QString &caption, QWidget *parent) : QWidget(parent),
+scacfg::scacfg(const QString &caption, QWidget *parent,QSettings *config) : QWidget(parent),
            checkBox(new QCheckBox("Enabled")),
            button(new QPushButton(caption))
 {
+	if(config)
+		this->sttngs = config;
+	else
+		return;
+	this->name = caption;
+	Qt::CheckState state = (Qt::CheckState) sttngs->value(caption+"/scapercfg_Enable").toInt();
+	checkBox->setCheckState(state);
+	checkBox->setTristate(false);
+	button->setEnabled(state);
     connect(checkBox, &QCheckBox::toggled,
-            button, &QPushButton::setEnabled);
-    connect(checkBox, &QCheckBox::toggled,
-            this, &scacfg::checkBoxToggled);
+            [=](const int isChecked ) {sttngs->setValue(caption+"/scapercfg_Enable", (isChecked)?2:0);
+									   button->setEnabled(isChecked);
+									   });
     connect(button, &QPushButton::clicked,
-            this, &scacfg::buttonClicked);
+			[=](){ dbg_prnt << "in " << __func__ << std::endl;openDialog(parent);});
             
     auto layout = new QHBoxLayout;
     layout->addWidget(checkBox);
@@ -35,11 +46,14 @@ scacfg::scacfg(const QString &caption, QWidget *parent) : QWidget(parent),
     this->setLayout(layout);
 }
 //-------------------------------------------------------------------------------------------------
-    
-QString scacfg::caption() const { 
 
-	return button->text(); 
-
+void scacfg::openDialog(QWidget *parent) {
+    dbg_prnt << "inside " << __func__ <<std::endl;
+	ScaperDialog *inst = new  ScaperDialog(this->name,parent);
+	//inst->fname_set(DFLTPATH);
+	inst->nme_set(this->name);
+	//data.dialog = inst;
+	inst->exec();
 }
 //-------------------------------------------------------------------------------------------------
 
@@ -57,3 +71,4 @@ bool scacfg::isChecked() const {
 void scacfg::setChecked(bool ch) { 
 	checkBox->setChecked(ch); 
 }
+//-------------------------------------------------------------------------------------------------

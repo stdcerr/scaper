@@ -32,20 +32,10 @@ scaper::scaper(QWidget *parent) {
 	QCheckBox *tmpbox = nullptr;
 	QString str = "";
 	QStringList groups = sttngs->childGroups();
-	sttngs->beginGroup("scaper");
 	foreach (const QString &grp, groups) {
-		scacfg *config = new scacfg(grp);
-		QHBoxLayout *hbox = new QHBoxLayout;
-		vbox->addWidget( DlgShwBtnCrt(grp) );
+		scacfg *config = new scacfg(grp, grpbox, sttngs);
+		vbox->addWidget(config);
 		dbg_prnt << "grp " <<grp.toStdString() << std::endl;
-		chkbox = DlgEnChckBxCrt("Enable", (Qt::CheckState)sttngs->value(grp+"/Enable").toInt());
-		tmpbox = chkbox;
-		this->sttngs_set(sttngs);
-		this->grp_set(grp);
-		vbox->addWidget(chkbox);
-		bool rv = QObject::connect(this->chkbox, &QCheckBox::clicked, [tmpbox, this] { this->DlgEnChckSv(this->grp); });
-		if (!rv)
-			std::cout << "connect for button " << grp.toStdString() << " failed" << std::endl;
 	}
 	grpbox->setLayout(vbox);
 }
@@ -175,26 +165,10 @@ int scaper::uncheckall(QObject *parentWidget) {
 //-------------------------------------------------------------------------------------------------
 
 int scaper::DialogShow(sca_dat &data) {
-	int rv = OK;
-
-	ScaperDialog *inst = new  ScaperDialog(data.parent);
-	inst->fname_set(DFLTPATH);
-	inst->nme_set(data.name);
-	data.dialog = inst;
-	inst->exec();
-
-	return rv;
 }
 //-------------------------------------------------------------------------------------------------
 
 int scaper::dialogShow(QWidget *parent) {
-    int rv = OK;
-    dbg_prnt << "inside " << __func__ <<std::endl;
-    ScaperDialog splintDia(parent);
-	splintDia.fname_set("Splint");	
-	splintDia.nme_set(this->fname_get());
-    splintDia.exec();
-    return rv;
 }
 //-------------------------------------------------------------------------------------------------
 
@@ -217,8 +191,43 @@ int scaper::runsca(QString &cmd) {
 }
 //-------------------------------------------------------------------------------------------------
 
-int scaper::CobfigGet(QStringList *con) {
+int scaper::ConfigGet(QStringList *con) {
 	int rv = OK;
     dbg_prnt << "inside " << __func__ <<std::endl;
 	return rv;
 }
+//-------------------------------------------------------------------------------------------------
+
+int scaper::ToolCmdExec() {
+	int rv = OK;
+	QStringList cmdlist;
+	QStringList groups = sttngs->childGroups();
+	foreach (const QString &grp, groups) {
+	dbg_prnt << "grp: " << grp.toStdString() << std::endl;
+	   cmdlist << CmdStrBuild(sttngs,grp);
+	}
+	foreach (const QString &cmd, cmdlist) {
+	dbg_prnt << "cmd: " << cmd.toStdString();
+	}
+	return rv;
+
+}
+//-------------------------------------------------------------------------------------------------
+
+QString scaper::CmdStrBuild(QSettings *settings,const QString &grp) {
+	QString cmd = "";
+	settings->beginGroup(const_cast<QString&>(grp));
+	QListWidget *optnslst = new QListWidget(this);
+	foreach(const QString &key, sttngs->childKeys()) {
+		QListWidgetItem *item = new QListWidgetItem(optnslst);
+		if(sttngs->value(key).toInt()) {
+			dbg_prnt << key.toStdString() << " is checked" <<std::endl;
+			cmd +=" " +key;
+
+		}
+	}
+	
+	sttngs->endGroup();
+	return cmd;
+}
+//-------------------------------------------------------------------------------------------------
