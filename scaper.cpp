@@ -21,12 +21,48 @@
 #include <unistd.h>
 #include "ui_scaper.h"
 #include "scaper.h"
+#include "scacfg.h"
 
-void scaper::DialogBtn(void) {
+
+//-------------------------------------------------------------------------------------------------
+scaper::scaper(QWidget *parent) {
+	QGroupBox *grpbox = parent->findChild<QGroupBox *>("ConfigGroupBox");
+	QVBoxLayout *vbox = new QVBoxLayout;
+	QSettings *sttngs = new QSettings(QSettings::NativeFormat,QSettings::UserScope,"GNU","scaper",nullptr);
+	QCheckBox *tmpbox = nullptr;
+	QString str = "";
+	QStringList groups = sttngs->childGroups();
+	foreach (const QString &grp, groups) {
+		scacfg *config = new scacfg(grp, grpbox, sttngs);
+		vbox->addWidget(config);
+		dbg_prnt << "grp " <<grp.toStdString() << std::endl;
+	}
+	grpbox->setLayout(vbox);
+}
+//-------------------------------------------------------------------------------------------------
+void scaper::DlgEnChckSv(QString &nme) {
+	dbg_prnt << "inside " << __func__ << " for " << nme.toStdString() << std::endl;
+    const QSettings *sttngs = sttngs_get();
+}
+//-------------------------------------------------------------------------------------------------
+QPushButton* scaper::DlgShwBtnCrt(QString nme) {
+	return new QPushButton(nme);
+}
+//-------------------------------------------------------------------------------------------------
+QCheckBox* scaper::DlgEnChckBxCrt(QString txt,Qt::CheckState chckd) {
+	QCheckBox *box = new QCheckBox(txt);
+	box->setCheckState(chckd);
+	return box;
+}
+//-------------------------------------------------------------------------------------------------
+
+void scaper::SplintDialogBtn(void) {
     dbg_prnt << "inside " << __func__ <<std::endl;
-    if (!dialogShow(ui.centralwidget)) {
-        dbg_prnt << "Testdialog showed!" << std::endl;
-    }
+	sca_dat splint;
+	splint.parent = ui.centralwidget;
+	splint.name = "Splint";
+	splint.fname = fname_get();
+	this->DialogShow(splint);
 }
 //-------------------------------------------------------------------------------------------------
 
@@ -128,14 +164,11 @@ int scaper::uncheckall(QObject *parentWidget) {
 }
 //-------------------------------------------------------------------------------------------------
 
+int scaper::DialogShow(sca_dat &data) {
+}
+//-------------------------------------------------------------------------------------------------
+
 int scaper::dialogShow(QWidget *parent) {
-    int rv = OK;
-    dbg_prnt << "inside " << __func__ <<std::endl;
-    //ScaperDialog *dialog = ScaperDialog(parent);
-    //dialog->show();
-    ScaperDialog dialog(parent);
-    dialog.exec();
-    return rv;
 }
 //-------------------------------------------------------------------------------------------------
 
@@ -158,8 +191,43 @@ int scaper::runsca(QString &cmd) {
 }
 //-------------------------------------------------------------------------------------------------
 
-int scaper::CobfigGet(QStringList *con) {
+int scaper::ConfigGet(QStringList *con) {
 	int rv = OK;
     dbg_prnt << "inside " << __func__ <<std::endl;
 	return rv;
 }
+//-------------------------------------------------------------------------------------------------
+
+int scaper::ToolCmdExec() {
+	int rv = OK;
+	QStringList cmdlist;
+	QStringList groups = sttngs->childGroups();
+	foreach (const QString &grp, groups) {
+	dbg_prnt << "grp: " << grp.toStdString() << std::endl;
+	   cmdlist << CmdStrBuild(sttngs,grp);
+	}
+	foreach (const QString &cmd, cmdlist) {
+	dbg_prnt << "cmd: " << cmd.toStdString();
+	}
+	return rv;
+
+}
+//-------------------------------------------------------------------------------------------------
+
+QString scaper::CmdStrBuild(QSettings *settings,const QString &grp) {
+	QString cmd = "";
+	settings->beginGroup(const_cast<QString&>(grp));
+	QListWidget *optnslst = new QListWidget(this);
+	foreach(const QString &key, sttngs->childKeys()) {
+		QListWidgetItem *item = new QListWidgetItem(optnslst);
+		if(sttngs->value(key).toInt()) {
+			dbg_prnt << key.toStdString() << " is checked" <<std::endl;
+			cmd +=" " +key;
+
+		}
+	}
+	
+	sttngs->endGroup();
+	return cmd;
+}
+//-------------------------------------------------------------------------------------------------

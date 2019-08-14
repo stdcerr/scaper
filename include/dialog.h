@@ -66,7 +66,6 @@ class ScaperDialog: public QDialog
 
     void PathSet(QString);
     void closeEvent(QCloseEvent *event);
-	bool isValidKey (const QString &key);
         
 };
 

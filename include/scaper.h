@@ -47,8 +47,6 @@ class scaper :QMainWindow{
         int uncheckall(QObject*);
         int dialogShow(QWidget*);
         int check(QWidget*);
-        int ToolCmdExec();
-        QString CmdStrBuild(QSettings *settings,const QString &grp);
 	QPushButton* DlgShwBtnCrt(QString nme);
 	QCheckBox* DlgEnChckBxCrt(QString txt,Qt::CheckState chckd);
 		int choose (QWidget*);
@@ -62,9 +60,9 @@ class scaper :QMainWindow{
 		QStringList conf;
 		QCheckBox *chkbox;
 		QString grp;
-		QSettings *sttngs;
+		const QSettings *sttngs;
 		void grp_set(const QString &str) {grp=str;}
-		void sttngs_set(QSettings* ptr) {sttngs = ptr;}
+		void sttngs_set(const QSettings* ptr) {sttngs = ptr;}
 		QString grp_get(void) const {return grp;}
 		const QSettings* sttngs_get(void) {return sttngs;}
     private slots:
