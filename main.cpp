@@ -26,7 +26,7 @@
 #include <qapplication.h>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QMessageBox>
-#include "ui_scaper.h"
+//#include "ui_scaper.h"
 #include "scaper.h"
 #include "dialog.h"
 #include "main.h"

@@ -19,7 +19,7 @@
 #include <QString>
 #include <QtWidgets/QFileDialog>
 #include <unistd.h>
-#include "ui_scaper.h"
+//#include "ui_scaper.h"
 #include "scaper.h"
 #include "scacfg.h"
 
