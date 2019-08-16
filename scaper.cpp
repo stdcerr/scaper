@@ -197,14 +197,14 @@ int scaper::ConfigGet(QStringList *con) {
 	return rv;
 }
 //-------------------------------------------------------------------------------------------------
-
+/*
 int scaper::ToolCmdExec() {
 	int rv = OK;
 	QStringList cmdlist;
 	QStringList groups = sttngs->childGroups();
 	foreach (const QString &grp, groups) {
 	dbg_prnt << "grp: " << grp.toStdString() << std::endl;
-	   cmdlist << CmdStrBuild(sttngs,grp);
+	   //cmdlist << CmdStrBuild(sttngs,grp);
 	}
 	foreach (const QString &cmd, cmdlist) {
 	dbg_prnt << "cmd: " << cmd.toStdString();
@@ -229,5 +229,5 @@ QString scaper::CmdStrBuild(QSettings *settings,const QString &grp) {
 	
 	sttngs->endGroup();
 	return cmd;
-}
+}*/
 //-------------------------------------------------------------------------------------------------

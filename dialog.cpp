@@ -96,7 +96,7 @@ void ScaperDialog::CheckAll(void) {
 	
 	for (int i = 0;i != list->count(); i++) {
 	QListWidgetItem *it = list->item(i);
-		//dbg_prnt << it->text().toStdString() << std::endl;
+		dbg_prnt << it->text().toStdString() << std::endl;
 		it->setCheckState(Qt::Checked);
 	}
 }

@@ -65,6 +65,8 @@ class scaper :QMainWindow{
 		void sttngs_set(const QSettings* ptr) {sttngs = ptr;}
 		QString grp_get(void) const {return grp;}
 		const QSettings* sttngs_get(void) {return sttngs;}
+        QString CmdStrBuild(QSettings *settings,const QString &grp);
+        int ToolCmdExec();
     private slots:
     		void DlgEnChckSv(QString &group);
     public:
