@@ -16,13 +16,14 @@ file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/scaper.conf
      DESTINATION $ENV{HOME}/.config/GNU/)
 #set include directory
 set(HDRS include/)
+set(SRCS src/)
 include_directories(${HDRS})
 # Populate a CMake variable with the sources
 set(SRCS
-            main.cpp
-            dialog.cpp
-            scaper.cpp
-            scacfg.cpp
+            ${SRCS}/main.cpp
+            ${SRCS}/dialog.cpp
+            ${SRCS}/scaper.cpp
+            ${SRCS}/scacfg.cpp
             ${HDRS}/dialog.h
             ${HDRS}/main.h
             ${HDRS}/scacfg.h
