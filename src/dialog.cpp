@@ -20,12 +20,18 @@
 #include "scaper.h"
 
 
-ScaperDialog::ScaperDialog(const QString &name, QWidget *parent) :QDialog(parent) {
+ScaperDialog::ScaperDialog(QString name, QSettings *set, QWidget *parent) : QDialog(parent) {
 	bool rv;
     int nWidth = 300;
     int nHeight = 300;    
-	resize(nWidth, nHeight);
+    if (set)
+        settings = set;
     nme_set(name);
+    
+    settings->beginGroup(nme_get());
+	resize(settings->value(CFG_PRFX+"size").toSize());
+    settings->endGroup();
+
     layout = new QVBoxLayout;
 	mlab = new QLabel;
 	blab = new QLabel;
@@ -52,27 +58,27 @@ rv = QObject::connect(this->uncheckallBtn, &QPushButton::clicked, [&] { this->Un
     if (!rv) {std::cerr << "connect() failed: rv:" << rv << std::endl;}
 
 
-	QSettings *sttngs = new QSettings(QSettings::NativeFormat,QSettings::UserScope,"GNU","scaper",nullptr);
+	QSettings *settings = new QSettings(QSettings::NativeFormat,QSettings::UserScope,"GNU","scaper",nullptr);
 	dbg_prnt << "nme_get(): " << nme_get().toStdString() << std::endl;
-	sttngs->beginGroup(nme_get());
+	settings->beginGroup(nme_get());
     dbg_prnt << "beginGroup [" << nme_get().toStdString() << "]"<<std::endl;
-    QString test = sttngs->value("path").toString();
+    QString test = settings->value(CFG_PRFX+"path").toString();
     dbg_prnt << "in " << __func__ << " path " << test.toStdString() << std::endl;
-	fname_set(sttngs->value("path").toString());
+	name_set(settings->value(CFG_PRFX+"path").toString());
 		
 	list = new QListWidget(this);
-	foreach(const QString &key, sttngs->childKeys()) {
+	foreach(QString key, settings->childKeys()) {
 		item = new QListWidgetItem(list);
 		item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
 		if(!isValidKey(key)) {
 			continue;
 		}
-		Qt::CheckState state = (Qt::CheckState) sttngs->value(key).toInt();
+		Qt::CheckState state = (Qt::CheckState) settings->value(key).toInt();
 		item->setCheckState(state);
 		item->setText(key);
 		list->addItem(item);
 	}
-    sttngs->endGroup();
+    settings->endGroup();
 	layout->addWidget(mlab);
 	hbox->addWidget(blab);
 	hbox->addWidget(binpth);
@@ -112,17 +118,17 @@ void ScaperDialog::UncheckAll(void) {
 //-------------------------------------------------------------------------------------------------
 
 void ScaperDialog::CloseDialog(void) {
-	QSettings *sttngs = new QSettings(QSettings::NativeFormat,QSettings::UserScope,"GNU",nme_get(),nullptr);
-	sttngs->beginGroup(nme_get());
-	sttngs->setValue("path",fname_get());
-	sttngs->setValue("size", this->size());
+    QSettings *sttngs = settings;
+    QString name = nme_get();
+	sttngs->beginGroup(name);
+	sttngs->setValue(CFG_PRFX+"path",name_get());
+	sttngs->setValue(CFG_PRFX+"size", this->size());
 
 	for (int i =0; i< list->count(); i++) {
 		QListWidgetItem* row = list->item(i);
 		sttngs->setValue(row->text(),row->checkState());
 	}
     sttngs->endGroup();
-	delete sttngs;
 
 	close();
 }
@@ -130,7 +136,7 @@ void ScaperDialog::CloseDialog(void) {
 
 void ScaperDialog::ChooseBin(void) {
     dbg_prnt << "inside " << __func__ <<std::endl;
-    fname_set(QFileDialog::getOpenFileName(nullptr,
+    name_set(QFileDialog::getOpenFileName(nullptr,
         "Path to splint", "/usr/bin", "All Files (*.*)"));
 }
 //-------------------------------------------------------------------------------------------------
@@ -147,7 +153,7 @@ this->CloseDialog();
 }
 //-------------------------------------------------------------------------------------------------
 
-bool ScaperDialog::isValidKey (const QString &key) {
+bool ScaperDialog::isValidKey (QString &key) {
 
     if (key.startsWith("scapercfg_"))
         return false;

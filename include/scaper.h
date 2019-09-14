@@ -37,6 +37,7 @@
 #define DFLTPATH		"/usr/bin/splint"
 #define CORP_NAME		"GNU"
 #define PROGRAM_NAME	"SCAPER"
+#define CFG_PRFX        QString("cfg_")
 #define LoadDefaults(a) (a)->fname_set(DFLTPATH);
 class ScaperDialog;		// foward declaration
 

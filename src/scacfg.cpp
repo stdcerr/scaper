@@ -29,12 +29,12 @@ scacfg::scacfg(const QString &caption, QWidget *parent,QSettings *config) : QWid
 	else
 		return;
 	this->name = caption;
-	Qt::CheckState state = (Qt::CheckState) sttngs->value(caption+"/scapercfg_Enable").toInt();
+	Qt::CheckState state = (Qt::CheckState) sttngs->value(caption+"/"+CFG_PRFX+"Enable").toInt();
 	checkBox->setCheckState(state);
 	checkBox->setTristate(false);
 	button->setEnabled(state);
     connect(checkBox, &QCheckBox::toggled,
-            [=](const int isChecked ) {sttngs->setValue(caption+"/scapercfg_Enable", (isChecked)?2:0);
+            [=](const int isChecked ) {sttngs->setValue(caption+"/"+CFG_PRFX+"Enable", (isChecked)?2:0);
 									   button->setEnabled(isChecked);
 									   });
     connect(button, &QPushButton::clicked,
@@ -49,7 +49,7 @@ scacfg::scacfg(const QString &caption, QWidget *parent,QSettings *config) : QWid
 
 void scacfg::openDialog(QWidget *parent) {
     dbg_prnt << "inside " << __func__ <<std::endl;
-	ScaperDialog *inst = new  ScaperDialog(this->name,parent);
+	ScaperDialog *inst = new  ScaperDialog(this->name,this->sttngs,parent);
 	//inst->fname_set(DFLTPATH);
 	inst->nme_set(this->name);
 	//data.dialog = inst;

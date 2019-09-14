@@ -31,11 +31,10 @@ class ScaperDialog: public QDialog
 {
     Q_OBJECT
     public:
-        ScaperDialog(const QString &name="", QWidget *parent=0);
-		void fname_set(const QString &s) {fname = s;
-                                          PathSet(s);}
-		QString fname_get(void) const {return fname;}
-		void nme_set(const QString &s) {SCAnme = s;}
+        ScaperDialog(QString name="", QSettings *set=nullptr, QWidget *parent=nullptr);
+		void name_set(QString s) {name = s;}
+		QString name_get(void) {return name;}
+		void nme_set(QString s) {SCAnme = s;}
 		QString nme_get(void) {return SCAnme;}
         ~ScaperDialog(){}
 
@@ -47,10 +46,11 @@ class ScaperDialog: public QDialog
 
     private:
 	QString SCAnme;
-	QString fname;
+	QString name;
 	QVBoxLayout *layout;
 	QLabel *mlab;
 	QLabel *blab;
+    QSettings *settings;
 
 	QLineEdit *binpth;
     QListWidget *list;
@@ -66,7 +66,7 @@ class ScaperDialog: public QDialog
 
     void PathSet(QString);
     void closeEvent(QCloseEvent *event);
-	bool isValidKey (const QString &key);
+	bool isValidKey (QString &key);
         
 };
 
