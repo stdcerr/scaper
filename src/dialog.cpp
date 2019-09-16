@@ -121,7 +121,7 @@ void ScaperDialog::CloseDialog(void) {
     QSettings *sttngs = settings;
     QString name = nme_get();
 	sttngs->beginGroup(name);
-	sttngs->setValue(CFG_PRFX+"path",name_get());
+	sttngs->setValue(CFG_PRFX+"path",this->PathGet());
 	sttngs->setValue(CFG_PRFX+"size", this->size());
 
 	for (int i =0; i< list->count(); i++) {
@@ -136,7 +136,8 @@ void ScaperDialog::CloseDialog(void) {
 
 void ScaperDialog::ChooseBin(void) {
     dbg_prnt << "inside " << __func__ <<std::endl;
-    name_set(QFileDialog::getOpenFileName(nullptr,
+    //name_set(QFileDialog::getOpenFileName(nullptr,
+    PathSet(QFileDialog::getOpenFileName(nullptr,
         "Path to splint", "/usr/bin", "All Files (*.*)"));
 }
 //-------------------------------------------------------------------------------------------------
@@ -144,6 +145,12 @@ void ScaperDialog::ChooseBin(void) {
 void ScaperDialog::PathSet(QString txt) {
 dbg_prnt << "in " << __func__ << " txt " << txt.toStdString() <<std::endl;
 	binpth->setText(txt);
+}
+//-------------------------------------------------------------------------------------------------
+
+QString ScaperDialog::PathGet() {
+dbg_prnt << "in " << __func__ << " returning path " << binpth->text().toStdString() <<std::endl;
+	return binpth->text();
 }
 //-------------------------------------------------------------------------------------------------
 

@@ -65,6 +65,7 @@ class ScaperDialog: public QDialog
 	QHBoxLayout *chckbox;
 
     void PathSet(QString);
+    QString PathGet();
     void closeEvent(QCloseEvent *event);
 	bool isValidKey (QString &key);
         
