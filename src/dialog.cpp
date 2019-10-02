@@ -73,10 +73,10 @@ rv = QObject::connect(this->uncheckallBtn, &QPushButton::clicked, [&] { this->Un
 		if(!isValidKey(key)) {
 			continue;
 		}
-		Qt::CheckState state = (Qt::CheckState) settings->value(key).toInt();
-		item->setCheckState(state);
-		item->setText(key);
-		list->addItem(item);
+       Qt::CheckState state = (Qt::CheckState) settings->value(key).toInt();
+       item->setCheckState(state);
+       item->setText(key);
+       list->addItem(item);
 	}
     settings->endGroup();
 	layout->addWidget(mlab);
@@ -162,8 +162,8 @@ this->CloseDialog();
 
 bool ScaperDialog::isValidKey (QString &key) {
 
-    if (key.startsWith("scapercfg_"))
+    if (key.startsWith(CFG_PRFX)) {
         return false;
-    	
+    }
 	return true;
 }
