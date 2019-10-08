@@ -68,15 +68,15 @@ rv = QObject::connect(this->uncheckallBtn, &QPushButton::clicked, [&] { this->Un
 		
 	list = new QListWidget(this);
 	foreach(QString key, settings->childKeys()) {
-		item = new QListWidgetItem(list);
-		item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
 		if(!isValidKey(key)) {
 			continue;
 		}
-       Qt::CheckState state = (Qt::CheckState) settings->value(key).toInt();
-       item->setCheckState(state);
-       item->setText(key);
-       list->addItem(item);
+		item = new QListWidgetItem(list);
+		item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
+        Qt::CheckState state = (Qt::CheckState) settings->value(key).toInt();
+        item->setCheckState(state);
+        item->setText(key);
+        list->addItem(item);
 	}
     settings->endGroup();
 	layout->addWidget(mlab);
