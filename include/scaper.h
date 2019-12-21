@@ -57,7 +57,7 @@ class scaper :QMainWindow{
 		int ConfigGet(QStringList *con);
 		QString pname;
         QString fname;
-        QStringList slst;
+        QStringList SrcLst;
 		QStringList conf;
 		QCheckBox *chkbox;
 		QString grp;
@@ -77,8 +77,11 @@ class scaper :QMainWindow{
         QString pname_get(void) const { return pname; }
         void fname_set(const QString &s) { fname = s; }
         QString fname_get(void) const { return fname; }
-        void srcs_set(const QStringList &l) { slst = l; }
-        QStringList srcs_get(void) const { return slst; }
+        void DisplayFiles(QStringList files);
+        void SrcFilesSet(QStringList FileList);
+        QStringList SrcFilesGet(void);
+        //void srcs_set(const QStringList &l) { slst = l; }
+        //QStringList srcs_get(void) const { return slst; }
 		void conf_set(const QStringList &c) {conf = c; }
 		QStringList conf_get(void) const { return conf; }
         Ui::MainWindow ui;

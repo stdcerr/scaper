@@ -26,7 +26,6 @@
 #include <qapplication.h>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QMessageBox>
-//#include "ui_scaper.h"
 #include "scaper.h"
 #include "dialog.h"
 #include "main.h"
@@ -49,6 +48,9 @@ int main( int argc, char **argv )
     app->ui = ui;
     QObject::connect(ui.SplintDialogPushButton, &QPushButton::clicked, [&] {
                 app->SplintDialogBtn();
+    });
+	QObject::connect(ui.choosePushButton, &QPushButton::clicked, [&] {
+                app->ChooseBtn();
     });
 	QObject::connect(ui.checkPushButton, &QPushButton::clicked, [&] {
                 app->ChckSCABtn();

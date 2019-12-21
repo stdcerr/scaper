@@ -86,6 +86,24 @@ return (access(path.toLocal8Bit().constData(), X_OK) == OK) ? OK : ERROR;
 }
 
 //-------------------------------------------------------------------------------------------------
+void scaper::SrcFilesSet(QStringList FileList) {
+    SrcLst = FileList;
+}
+//-------------------------------------------------------------------------------------------------
+
+QStringList scaper::SrcFilesGet(void) {
+    return SrcLst;
+}
+//-------------------------------------------------------------------------------------------------
+
+void scaper::DisplayFiles(QStringList files) {
+
+    QString fls;
+	for ( const auto& i : files )
+		fls.append(" \""+i+"\"");
+    ui.FilesLineEdit->setText(fls);
+}
+//-------------------------------------------------------------------------------------------------
 
 void scaper::ChooseBtn(void) {
     dbg_prnt << "inside " << __func__ <<std::endl;
@@ -94,8 +112,10 @@ void scaper::ChooseBtn(void) {
 	dialog.setDirectory(dir);
 	dialog.setFileMode(QFileDialog::ExistingFiles);
 	dialog.setNameFilter("C Files(*.c *.cpp)");
-	if (dialog.exec())
-		srcs_set(dialog.selectedFiles());
+	if (dialog.exec()){
+		SrcFilesSet(dialog.selectedFiles());
+        DisplayFiles(SrcFilesGet());
+    }
 }
 //-------------------------------------------------------------------------------------------------
 
@@ -117,14 +137,14 @@ void scaper::ChckSCABtn(void) {
     }
 //-------------------------------------------------------------------------------------------------
 
-void scaper:: updateError(QProcess *proc) {
+void scaper::updateError(QProcess *proc) {
     dbg_prnt << "inside " << __func__ <<std::endl;
 	QByteArray dat = proc->readAllStandardError();
 	ui.outputTextEdit->append(QString(dat));
 }
 //-------------------------------------------------------------------------------------------------
 
-void scaper:: updateText(QProcess *proc) {
+void scaper::updateText(QProcess *proc) {
     dbg_prnt << "inside " << __func__ <<std::endl;
 	QByteArray dat = proc->readAllStandardOutput();
 	ui.outputTextEdit->append(QString(dat));
@@ -178,9 +198,10 @@ int scaper::asm_cmd(QString &cmd) {
 	int rv = OK;
 	cmd = fname_get();
 	// TODO: include all the options
-	QStringList sources = srcs_get();
+	QStringList sources = SrcFilesGet();
 	for ( const auto& i : sources )
 		cmd.append(" "+i);
+    dbg_prnt << __func__ << "cmd: " << cmd.toStdString() << std::endl;
 	return rv;
 }
 //-------------------------------------------------------------------------------------------------
