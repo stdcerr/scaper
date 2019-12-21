@@ -64,6 +64,7 @@ rv = QObject::connect(this->uncheckallBtn, &QPushButton::clicked, [&] { this->Un
     dbg_prnt << "beginGroup [" << nme_get().toStdString() << "]"<<std::endl;
     QString test = settings->value(CFG_PRFX+"path").toString();
     dbg_prnt << "in " << __func__ << " path " << test.toStdString() << std::endl;
+    PathSet(test);
 	name_set(settings->value(CFG_PRFX+"path").toString());
 		
 	list = new QListWidget(this);
