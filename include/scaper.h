@@ -51,8 +51,8 @@ class scaper :QMainWindow{
 	QPushButton* DlgShwBtnCrt(QString nme);
 	QCheckBox* DlgEnChckBxCrt(QString txt,Qt::CheckState chckd);
 		int choose (QWidget*);
-		int asm_cmd(QString &cmd);
-        int runsca(QString&);
+		void AsmCmd(QString &cmd);
+        int RunSCA(QString&);
 		int CheckFilePath(QString path);
 		int ConfigGet(QStringList *con);
 		QString pname;
@@ -61,12 +61,13 @@ class scaper :QMainWindow{
 		QStringList conf;
 		QCheckBox *chkbox;
 		QString grp;
-		const QSettings *sttngs;
+		QSettings *sttngs;
 		void grp_set(const QString &str) {grp=str;}
-		void sttngs_set(const QSettings* ptr) {sttngs = ptr;}
+		void sttngs_set(QSettings* ptr) {sttngs = ptr;}
 		QString grp_get(void) const {return grp;}
 		const QSettings* sttngs_get(void) {return sttngs;}
         QString CmdStrBuild(QSettings *settings,const QString &grp);
+        QStringList EnToolsGet(QSettings *setitings);
         int ToolCmdExec();
     private slots:
     		void DlgEnChckSv(QString &group);

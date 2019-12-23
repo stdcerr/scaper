@@ -19,7 +19,6 @@
 #include <QString>
 #include <QtWidgets/QFileDialog>
 #include <unistd.h>
-//#include "ui_scaper.h"
 #include "scaper.h"
 #include "scacfg.h"
 
@@ -28,7 +27,7 @@
 scaper::scaper(QWidget *parent) {
 	QGroupBox *grpbox = parent->findChild<QGroupBox *>("ConfigGroupBox");
 	QVBoxLayout *vbox = new QVBoxLayout;
-	QSettings *sttngs = new QSettings(QSettings::NativeFormat,QSettings::UserScope,"GNU","scaper",nullptr);
+	/*QSettings **/sttngs = new QSettings(QSettings::NativeFormat,QSettings::UserScope,"GNU","scaper",nullptr);
 	QCheckBox *tmpbox = nullptr;
 	QString str = "";
 	QStringList groups = sttngs->childGroups();
@@ -122,16 +121,14 @@ void scaper::ChooseBtn(void) {
 void scaper::ChckSCABtn(void) {
 	QString cmd; 
     dbg_prnt << "inside " << __func__ <<std::endl;
+
 	if (CheckFilePath(fname_get())) {
 		std::cerr << "Error: check permissions of selected binary. Exit" << std::endl;
 		exit(ERROR);
 		}
 	dbg_prnt << "OK"<< std::endl;
-	asm_cmd(cmd);
-	dbg_prnt << "cmd: " << cmd.toStdString() << std::endl;
+	AsmCmd(cmd);
 
-	if (!runsca(cmd))
-		dbg_prnt << "SCA invoked!" << std::endl;
 
 
     }
@@ -194,19 +191,43 @@ int scaper::dialogShow(QWidget *parent) {
 }
 //-------------------------------------------------------------------------------------------------
 
-int scaper::asm_cmd(QString &cmd) {
-	int rv = OK;
-	cmd = fname_get();
-	// TODO: include all the options
-	QStringList sources = SrcFilesGet();
-	for ( const auto& i : sources )
-		cmd.append(" "+i);
-    dbg_prnt << __func__ << "cmd: " << cmd.toStdString() << std::endl;
-	return rv;
+void scaper::AsmCmd(QString &cmd) {
+	int rv;
+	//cmd = fname_get();
+    QStringList tools = EnToolsGet(sttngs);
+    foreach(const QString &tool, tools) {
+        dbg_prnt << __func__ << ":: " << tool.toStdString() << std::endl;
+        sttngs->beginGroup(tool);
+        QString cmd = sttngs->value(CFG_PRFX+"path").toString();
+        dbg_prnt << tool.toStdString() << " cmd: " << cmd.toStdString()<< std::endl;
+        if (tool == "Splint") {
+            //GetSplintOpts();
+            dbg_prnt << "cmd: "<< cmd.toStdString() << " + appended options" << std::endl;
+    
+            foreach(QString key, sttngs->childKeys()) {
+                /*if(!isValidKey(key)) {
+                    continue;
+    		}*/
+            Qt::CheckState state = (Qt::CheckState) sttngs->value(key).toInt();
+            if (state == Qt::Checked)
+                cmd.append(" -" + key);
+            }
+            dbg_prnt << "assembled cmd: " << cmd.toStdString() <<std::endl;
+        } //else {
+        sttngs->endGroup();
+            //dbg_prnt << "current tool is " << tool <<std::endl;
+        	//QStringList sources = SrcFilesGet();
+        	//for ( const auto& i : sources )
+            //    cmd.prepend(" "+i);
+            //dbg_prnt << __func__ << ": " << cmd.toStdString() << std::endl;
+        //}
+    }
+	if (!RunSCA(cmd))
+		dbg_prnt << "SCA invoked!" << std::endl;
 }
 //-------------------------------------------------------------------------------------------------
 
-int scaper::runsca(QString &cmd) {
+int scaper::RunSCA(QString &cmd) {
 	int rv = OK;
     dbg_prnt << "inside " << __func__ <<std::endl;
 	(void)proc->start(cmd);
@@ -220,37 +241,19 @@ int scaper::ConfigGet(QStringList *con) {
 	return rv;
 }
 //-------------------------------------------------------------------------------------------------
-/*
-int scaper::ToolCmdExec() {
-	int rv = OK;
-	QStringList cmdlist;
-	QStringList groups = sttngs->childGroups();
-	foreach (const QString &grp, groups) {
-	dbg_prnt << "grp: " << grp.toStdString() << std::endl;
-	   //cmdlist << CmdStrBuild(sttngs,grp);
-	}
-	foreach (const QString &cmd, cmdlist) {
-	dbg_prnt << "cmd: " << cmd.toStdString();
-	}
-	return rv;
+
+QStringList scaper::EnToolsGet(QSettings *sttngs) {
+    QStringList res; 
+    QStringList groups = sttngs->childGroups();
+    foreach(const QString &grp, groups) {
+        sttngs->beginGroup(grp);
+        Qt::CheckState state = (Qt::CheckState)sttngs->value(CFG_PRFX+"Enable").toInt();
+        sttngs->endGroup();
+        if (state == Qt::Checked) { 
+            res.append(grp);
+        } 
+    }
+    return res;
 
 }
-//-------------------------------------------------------------------------------------------------
-
-QString scaper::CmdStrBuild(QSettings *settings,const QString &grp) {
-	QString cmd = "";
-	settings->beginGroup(const_cast<QString&>(grp));
-	QListWidget *optnslst = new QListWidget(this);
-	foreach(const QString &key, sttngs->childKeys()) {
-		QListWidgetItem *item = new QListWidgetItem(optnslst);
-		if(sttngs->value(key).toInt()) {
-			dbg_prnt << key.toStdString() << " is checked" <<std::endl;
-			cmd +=" " +key;
-
-		}
-	}
-	
-	sttngs->endGroup();
-	return cmd;
-}*/
 //-------------------------------------------------------------------------------------------------
